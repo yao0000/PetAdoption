@@ -11,7 +11,7 @@
     tools:context=".Activity.LoginActivity">
 
     <TextView
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_width="match_parent"

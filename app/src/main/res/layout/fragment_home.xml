@@ -3,9 +3,160 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
     android:padding="15dp"
-    tools:context=".Activity.fragments.HomeFragment">
+    tools:context=".Activity.fragments.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/beginner_intro"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_cat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/edittext_border"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:layout_marginBottom="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/image_cat"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/cat"
+                    android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#BBBBBB"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
 
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                tools:ignore="RtlSymmetry">
+
+                <TextView
+                    android:id="@+id/text_title_cats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_title"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/text_description_cats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_desc"
+                    android:paddingStart="8dp"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/button_read_more_cats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:text="@string/read_more" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_dog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/edittext_border"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:layout_marginBottom="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/edittext_border"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/dog"
+                    android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#BBBBBB"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                tools:ignore="RtlSymmetry">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dog_title"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dog_desc"
+                    android:paddingStart="8dp"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:text="@string/read_more" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

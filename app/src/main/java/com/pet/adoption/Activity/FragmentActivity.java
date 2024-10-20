@@ -1,9 +1,9 @@
 package com.pet.adoption.Activity;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -12,36 +12,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.pet.adoption.Activity.fragments.HomeFragment;
+import com.pet.adoption.Activity.fragments.home.HomeFragment;
 import com.pet.adoption.Activity.fragments.PetFragment;
 import com.pet.adoption.Activity.fragments.PostFragment;
 import com.pet.adoption.Activity.fragments.ProfileFragment;
 import com.pet.adoption.R;
 
 public class FragmentActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_fragment);
-
-        ((BottomNavigationView)findViewById(R.id.bottomNavigationView))
-                .setOnNavigationItemSelectedListener(listener);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_layout, new HomeFragment())
-                .commit();
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
-            return insets;
-        });
-    }
-
+    private static FragmentActivity instance;
     private BottomNavigationView.OnNavigationItemSelectedListener listener =
             item -> {
                 Fragment fragment;
@@ -52,10 +30,40 @@ public class FragmentActivity extends AppCompatActivity {
                 else if (id == R.id.nav_post) fragment = new PostFragment();
                 else fragment = new ProfileFragment();
 
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout, fragment)
-                        .commit();
+                commitFragment(fragment);
 
                 return true;
             };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_fragment);
+        instance = this;
+
+        ((BottomNavigationView)findViewById(R.id.bottomNavigationView))
+                .setOnNavigationItemSelectedListener(listener);
+
+        commitFragment(new HomeFragment());
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            return insets;
+        });
+    }
+
+    public static FragmentActivity getInstance(){
+        return instance;
+    }
+
+    public void commitFragment(@NonNull Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit();
+    }
+
 }
