@@ -1,4 +1,4 @@
-package com.pet.adoption.Activity.fragments.home;
+package com.pet.adoption.activities.fragments.home;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pet.adoption.Activity.FragmentActivity;
+import com.pet.adoption.activities.FragmentActivity;
 import com.pet.adoption.R;
 
 public class HomeFragment extends Fragment {
@@ -24,7 +24,9 @@ public class HomeFragment extends Fragment {
 
     private void onLoad(View v){
         v.findViewById(R.id.ll_cat).setOnClickListener(e ->
-                setFragment(new CatGuideFragment()));
+                setFragment(new GuideFragment(GuideFragment.Type.Cat)));
+        v.findViewById(R.id.ll_dog).setOnClickListener(e ->
+                setFragment(new GuideFragment(GuideFragment.Type.Dog)));
     }
 
     private void setFragment(Fragment fragment){

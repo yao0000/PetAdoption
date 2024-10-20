@@ -18,7 +18,7 @@
 
     <string name="beginner_intro">Beginner\'s Guide to Pet Care</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="read_more">Read More...</string>
+    <string name="read_more">Read More&#8230;</string>
     <string name="cat_desc">1. What is a cat’s stress response?\n2. How to smoothly bring a cat home/take a cat outside?\n3. How to teach a cat to use a litter box and litter?\n4. What should a cat eat on a daily basis?\n5. How to trim a cat’s nails?</string>
     <string name="cat_title">Basic Knowledge About Cats:</string>
     <string name="dog_desc">1. Basic supplies preparation\n2. Health management for dogs\n3. Diet and feeding\n4. Training and behavior management\n5. Living environment and daily care\n6. Mental preparation and awareness of responsibility</string>
@@ -26,6 +26,7 @@
     <string name="back_to_home">Back to Home</string>
     <string name="cat_image">Cat Image</string>
     <string name="cat_intro">1. What is a cat’s stress response?</string>
+    <string name="dog_intro">Coming soon</string>
     <string name="cat_basic_title">Basic Knowledge About Cats</string>
 
 </resources>

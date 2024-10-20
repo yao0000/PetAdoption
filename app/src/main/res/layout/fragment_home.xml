@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
     android:padding="15dp"
-    tools:context=".Activity.fragments.home.HomeFragment">
+    tools:context=".activities.fragments.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
             android:text="@string/beginner_intro"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
         <LinearLayout
             android:id="@+id/ll_cat"
@@ -70,7 +71,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cat_title"
-                    android:textSize="12sp" />
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/text_description_cats"
@@ -78,15 +80,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/cat_desc"
                     android:paddingStart="8dp"
-                    android:textSize="12sp" />
+                    android:textSize="11sp"
+                    android:fontFamily="@font/lato_regular"/>
 
                 <TextView
                     android:id="@+id/button_read_more_cats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textAlignment="textEnd"
+                    android:fontFamily="@font/lato_bold_italic"
                     android:text="@string/read_more" />
             </LinearLayout>
         </LinearLayout>
@@ -140,21 +144,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dog_title"
-                    android:textSize="12sp" />
+                    android:textSize="11sp"
+                    android:fontFamily="@font/lato_regular"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dog_desc"
                     android:paddingStart="8dp"
-                    android:textSize="12sp" />
+                    android:textSize="11sp"
+                    android:fontFamily="@font/lato_regular"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textAlignment="textEnd"
+                    android:fontFamily="@font/lato_bold_italic"
                     android:text="@string/read_more" />
             </LinearLayout>
         </LinearLayout>

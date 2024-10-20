@@ -3,14 +3,9 @@ package com.pet.adoption;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.pet.adoption.Activity.FragmentActivity;
-import com.pet.adoption.Activity.LoginActivity;
+import com.pet.adoption.activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

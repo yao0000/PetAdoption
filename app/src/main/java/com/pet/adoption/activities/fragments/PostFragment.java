@@ -1,4 +1,4 @@
-package com.pet.adoption.Activity.fragments;
+package com.pet.adoption.activities.fragments;
 
 import android.os.Bundle;
 

@@ -1,9 +1,8 @@
-package com.pet.adoption.Activity;
+package com.pet.adoption.activities;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -12,15 +11,15 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.pet.adoption.Activity.fragments.home.HomeFragment;
-import com.pet.adoption.Activity.fragments.PetFragment;
-import com.pet.adoption.Activity.fragments.PostFragment;
-import com.pet.adoption.Activity.fragments.ProfileFragment;
+import com.pet.adoption.activities.fragments.home.HomeFragment;
+import com.pet.adoption.activities.fragments.PetFragment;
+import com.pet.adoption.activities.fragments.PostFragment;
+import com.pet.adoption.activities.fragments.ProfileFragment;
 import com.pet.adoption.R;
 
 public class FragmentActivity extends AppCompatActivity {
     private static FragmentActivity instance;
-    private BottomNavigationView.OnNavigationItemSelectedListener listener =
+    private final BottomNavigationView.OnNavigationItemSelectedListener listener =
             item -> {
                 Fragment fragment;
                 int id = item.getItemId();
