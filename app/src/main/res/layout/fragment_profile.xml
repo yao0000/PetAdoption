@@ -1,13 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:padding="15dp"
     tools:context=".activities.fragments.ProfileFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:ignore="UselessLeaf">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile"
+            android:textColor="#000"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/lato"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/iv_profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_profile_placeholder"
+            android:background="@drawable/ic_profile_placeholder_background"
+            android:layout_marginTop="50dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Hi, [User]"
+            android:textSize="24sp"
+            android:textColor="#000"
+            android:fontFamily="@font/lato_bold"
+            android:layout_marginVertical="20dp"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profile_button_border"
+            android:padding="8dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_bookmark"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center_vertical"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saved"
+                android:textColor="#000"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_log_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profile_button_border"
+            android:padding="8dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_logout_24"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center_vertical"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/log_out"
+                android:textColor="#000"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="Adopt, don’t shop, and bring hope to stray animals."
+            android:textSize="14sp"
+            android:textColor="#666"
+            android:fontFamily="@font/lato_italic"
+            android:layout_marginTop="14dp"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
 
 </FrameLayout>

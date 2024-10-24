@@ -75,13 +75,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void addUserDB(Account account){
         db.collection("users")
-                .add(account)
+                .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
+                .set(account)
                 .addOnSuccessListener(e -> {
                     Toast.makeText(RegisterActivity.this
                                     ,getString(R.string.success_register)
                                     , Toast.LENGTH_SHORT).show();
 
                     RegisterActivity.this.finish();
+                    mAuth.signOut();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(RegisterActivity.this

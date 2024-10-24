@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.pet.adoption.activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });*/
+        //FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(this, LoginActivity.class));
     }
 }

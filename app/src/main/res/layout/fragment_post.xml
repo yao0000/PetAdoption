@@ -3,11 +3,223 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="@drawable/gradient_background"
     tools:context=".activities.fragments.PostFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_fragment_post"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:paddingBottom="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_desc"
+            android:textColor="#757575"
+            android:fontFamily="@font/lato_italic"
+            android:textSize="14sp"
+            android:paddingBottom="16dp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="12">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pet Name"
+                android:layout_columnWeight="2"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pet Age"
+                android:textSize="15sp"
+                android:layout_columnWeight="2"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext_border"
+                android:paddingHorizontal="10dp"
+                android:autofillHints=""
+                android:fontFamily="@font/lato_bold"
+                android:inputType="text"
+                android:textStyle="normal"
+                tools:ignore="LabelFor" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_pet_age"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pet Type"
+                android:layout_columnWeight="2"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Size of Pet"
+                android:textSize="15sp"
+                android:layout_columnWeight="2"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:id="@+id/spinner_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_pet_type"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_pet_size"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Species"
+                android:layout_columnWeight="2"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Neuter Status"
+                android:textSize="15sp"
+                android:layout_columnWeight="2"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:id="@+id/spinner_species"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_empty"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_neuter_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_empty"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+        </GridLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

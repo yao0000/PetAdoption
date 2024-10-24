@@ -29,4 +29,61 @@
     <string name="dog_intro">Coming soon</string>
     <string name="cat_basic_title">Basic Knowledge About Cats</string>
 
+    <string name="user_profile">User Profile</string>
+    <string name="saved">Saved</string>
+    <string name="log_out">Log Out</string>
+    <string name="title_fragment_post">Post a Pet for Adoption</string>
+    <string name="post_desc">Found a stray pet but can’t provide a home? Share the details here and help connect them with someone who can. Please fill out the information below to create a post for this pet.</string>
+
+
+    <string-array name="array_empty">
+        <item>---Please Select---</item>
+    </string-array>
+
+    <string-array name="array_pet_age">
+        <item>---Please Select---</item>
+        <item>&lt; 1 year</item> <!-- This represents "< 1 year" -->
+        <item>1 – 3 years</item>
+        <item>3 – 7 years</item>
+        <item>&gt; 7 years</item> <!-- This represents "> 7 years" -->
+    </string-array>
+
+    <string-array name="array_pet_type">
+        <item>---Please Select---</item>
+        <item>Cat</item>
+        <item>Dog</item>
+    </string-array>
+
+    <string-array name="array_pet_size">
+        <item>---Please Select---</item>
+        <item>Small breed</item>
+        <item>Medium breed</item>
+        <item>Large breed</item>
+    </string-array>
+
+    <string-array name="array_gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="array_states">
+        <item>Johor</item>
+        <item>Kedah</item>
+        <item>Kelantan</item>
+        <item>Malacca</item>
+        <item>Negeri Sembilan</item>
+        <item>Pahang</item>
+        <item>Penang</item>
+        <item>Perak</item>
+        <item>Perlis</item>
+        <item>Sabah</item>
+        <item>Sarawak</item>
+        <item>Selangor</item>
+        <item>Terengganu</item>
+        <item>Kuala Lumpur</item>
+        <item>Labuan</item>
+        <item>Putrajaya</item>
+    </string-array>
+
+
 </resources>

@@ -12,6 +12,9 @@ public class Account {
         this.userUID = userUID;
     }
 
+    public Account() {
+    }
+
     public String getEmail() {
         return email;
     }
