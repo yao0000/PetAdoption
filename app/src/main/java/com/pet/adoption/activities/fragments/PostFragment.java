@@ -46,7 +46,6 @@ public class PostFragment extends Fragment {
             Uri imgUri = data.getData();
             assert imgUri != null;
             et.setText(imgUri.getPath());
-
         }
     }
 }
