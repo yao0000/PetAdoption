@@ -218,8 +218,178 @@
                 android:entries="@array/array_empty"
                 android:background="@drawable/edittext_border"
                 android:gravity="center" />
+
+
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="WhatsApp Contact"
+                android:layout_columnWeight="2"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="15sp"
+                android:layout_columnWeight="2"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/et_contact_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext_border"
+                android:paddingHorizontal="10dp"
+                android:autofillHints=""
+                android:fontFamily="@font/lato_bold"
+                android:inputType="text"
+                android:textStyle="normal"
+                tools:ignore="LabelFor" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_gender"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+
+
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:layout_columnWeight="2"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pet's Picture"
+                android:textSize="15sp"
+                android:layout_columnWeight="2"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:id="@+id/spinner_state"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center"
+                android:entries="@array/array_states"
+                android:background="@drawable/edittext_border"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_columnWeight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_upload"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_columnWeight="2"
+                android:text="--Please Upload--"
+                android:textAlignment="center"
+                android:background="@drawable/edittext_border"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato"
+                tools:ignore="HardcodedText" />
+
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_columnWeight="2"
+                android:layout_columnSpan="3"
+                android:textSize="15sp"
+                android:fontFamily="@font/lato_bold"
+                tools:ignore="HardcodedText" />
+
+
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_columnSpan="3"
+                android:background="@drawable/edittext_border"
+                android:paddingHorizontal="10dp"
+                android:autofillHints=""
+                android:fontFamily="@font/lato_bold"
+                android:inputType="text"
+                android:textStyle="normal"
+                tools:ignore="LabelFor" />
+
         </GridLayout>
 
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/yellow"
+            android:text="@string/submit"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato"/>
     </LinearLayout>
 
 </FrameLayout>

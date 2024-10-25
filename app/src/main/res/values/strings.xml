@@ -34,6 +34,7 @@
     <string name="log_out">Log Out</string>
     <string name="title_fragment_post">Post a Pet for Adoption</string>
     <string name="post_desc">Found a stray pet but can’t provide a home? Share the details here and help connect them with someone who can. Please fill out the information below to create a post for this pet.</string>
+    <string name="submit">Submit</string>
 
 
     <string-array name="array_empty">
@@ -61,12 +62,91 @@
         <item>Large breed</item>
     </string-array>
 
+    <string-array name="array_species_breed_dog_small">
+        <item>---Please Select---</item>
+        <item>Chihuahua</item>
+        <item>Pomeranian</item>
+        <item>Yorkshire Terrier</item>
+        <item>French Bulldog</item>
+        <item>Dachshund</item>
+        <item>Maltese</item>
+        <item>Shih Tzu</item>
+        <item>Pug</item>
+        <item>Mixed</item>
+    </string-array>
+    
+    <string-array name="array_species_breed_dog_medium">
+        <item>---Please Select---</item>
+        <item>Cocker Spaniel</item>
+        <item>Border Collie</item>
+        <item>Bulldog</item>
+        <item>Schnauzer</item>
+        <item>Shiba Inu</item>
+        <item>Collie</item>
+        <item>Bull Terrier</item>
+        <item>Australian Cattle Dog</item>
+        <item>Basset Hound</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="array_species_breed_dog_large">
+        <item>---Please Select---</item>
+        <item>German Shepherd</item>
+        <item>Golden Retriever</item>
+        <item>Labrador Retriever</item>
+        <item>Doberman Pinscher</item>
+        <item>Samoyed</item>
+        <item>Siberian Husky</item>
+        <item>Rottweiler</item>
+        <item>Great Dane</item>
+        <item>Alaskan Malamute</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="array_species_breed_cat_small">
+        <item>---Please Select---</item>
+        <item>Singapura</item>
+        <item>Cornish Rex</item>
+        <item>Oriental Shorthair</item>
+        <item>Burmese</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="array_species_breed_cat_medium">
+        <item>---Please Select---</item>
+        <item>American Shorthair</item>
+        <item>British Shorthair</item>
+        <item>Siamese</item>
+        <item>Russian Blue</item>
+        <item>Abyssinian</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="array_species_breed_cat_large">
+        <item>---Please Select---</item>
+        <item>Maine Coon</item>
+        <item>Siberian</item>
+        <item>Norwegian Forest Cat</item>
+        <item>Ragdoll</item>
+        <item>Turkish Van</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="array_neuter_status">
+        <item>---Please Select---</item>
+        <item>Neutered</item>
+        <item>Intact</item>
+    </string-array>
+
+
     <string-array name="array_gender">
+        <item>---Please Select---</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
 
     <string-array name="array_states">
+        <item>---Please Select---</item>
         <item>Johor</item>
         <item>Kedah</item>
         <item>Kelantan</item>

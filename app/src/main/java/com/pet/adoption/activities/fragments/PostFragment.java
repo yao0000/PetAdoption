@@ -16,21 +16,28 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.pet.adoption.R;
 
 import java.util.Objects;
 
 public class PostFragment extends Fragment {
+
     private static final int PICK_IMG = 101;
-    private EditText et;
+
+    private TextView tv_upload;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post, container, false);
-        et = view.findViewById(R.id.et_name);
-        et.setOnClickListener(e -> showGallery());
+        onLoad(view);
         return view;
+    }
+
+    private void onLoad(View v){
+        // To set event handler
+        v.findViewById(R.id.tv_upload).setOnClickListener(e -> showGallery());
     }
 
     private void showGallery(){
@@ -45,7 +52,7 @@ public class PostFragment extends Fragment {
         if (requestCode == PICK_IMG && resultCode == RESULT_OK && data != null) {
             Uri imgUri = data.getData();
             assert imgUri != null;
-            et.setText(imgUri.getPath());
+            tv_upload.setText(imgUri.getPath());
         }
     }
 }
