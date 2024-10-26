@@ -4,10 +4,20 @@ import java.util.List;
 
 public class PetInfo {
     private String time;
-    private String description;
     private List<String> tags;
     private String fileName;
     private String ownerUID;
+
+    private String name;
+    private String age;
+    private String type;
+    private String size;
+    private String species;
+    private String status;
+    private String contact;
+    private Boolean gender;
+    private String state;
+    private String description;
 
     public PetInfo(String time, String description, List<String> tags, String fileName, String ownerUID) {
         this.time = time;

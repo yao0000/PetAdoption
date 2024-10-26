@@ -1,4 +1,4 @@
-package com.pet.adoption.activities.fragments;
+package com.pet.adoption.activities.fragments.pet;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;

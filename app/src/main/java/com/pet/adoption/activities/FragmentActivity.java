@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pet.adoption.activities.fragments.home.HomeFragment;
-import com.pet.adoption.activities.fragments.PetFragment;
-import com.pet.adoption.activities.fragments.PostFragment;
+import com.pet.adoption.activities.fragments.pet.PetFragment;
+import com.pet.adoption.activities.fragments.post.PostFragment;
 import com.pet.adoption.activities.fragments.ProfileFragment;
 import com.pet.adoption.R;
 
