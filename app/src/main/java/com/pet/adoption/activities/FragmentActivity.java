@@ -44,7 +44,7 @@ public class FragmentActivity extends AppCompatActivity {
         ((BottomNavigationView)findViewById(R.id.bottomNavigationView))
                 .setOnNavigationItemSelectedListener(listener);
 
-        commitFragment(new HomeFragment());
+        commitFragment(new PostFragment());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

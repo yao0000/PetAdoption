@@ -215,12 +215,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textAlignment="center"
-                android:entries="@array/array_empty"
+                android:entries="@array/array_neuter_status"
                 android:background="@drawable/edittext_border"
                 android:gravity="center" />
-
-
-
 
 
             <TextView
@@ -341,6 +338,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_columnWeight="2"
+                android:singleLine="true"
                 android:text="--Please Upload--"
                 android:textAlignment="center"
                 android:background="@drawable/edittext_border"
@@ -373,10 +371,12 @@
                 android:layout_columnSpan="3"
                 android:background="@drawable/edittext_border"
                 android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
                 android:autofillHints=""
                 android:fontFamily="@font/lato_bold"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:textStyle="normal"
+                android:gravity="top|start"
                 tools:ignore="LabelFor" />
 
         </GridLayout>
@@ -390,6 +390,14 @@
             android:text="@string/submit"
             android:textColor="@color/black"
             android:fontFamily="@font/lato"/>
+
+        <ProgressBar
+            android:id="@+id/uploadProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:max="100" />
+
     </LinearLayout>
 
 </FrameLayout>

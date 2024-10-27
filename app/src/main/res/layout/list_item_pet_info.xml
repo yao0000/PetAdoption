@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
+    android:layout_marginVertical="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -28,22 +29,22 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="8sp"
             android:text="date time"
-            android:textColor="#999999"
-            tools:ignore="HardcodedText" />
+            android:textColor="#6B6B6B"
+            tools:ignore="HardcodedText,SmallSp" />
 
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:textSize="14sp"
-            android:textColor="#333333"
+            android:textSize="8sp"
+            android:textColor="#1E1E1E"
             android:text="Description"
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,SmallSp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,44 +54,62 @@
 
             <TextView
                 android:id="@+id/tvTag1"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="8sp"
                 android:background="@drawable/edittext_border"
                 android:textAlignment="center"
+                android:paddingHorizontal="3dp"
                 android:text="#Tag 1"
                 android:textStyle="bold"
-                android:textColor="@color/blue"
+                android:textColor="#0800FF"
                 android:layout_marginTop="5dp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,SmallSp" />
 
             <TextView
                 android:id="@+id/tvTag2"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="8sp"
                 android:background="@drawable/edittext_border"
                 android:layout_marginStart="10dp"
                 android:textAlignment="center"
+                android:paddingHorizontal="3dp"
                 android:text="#Tag 2"
                 android:textStyle="bold"
-                android:textColor="@color/blue"
+                android:textColor="#0800FF"
                 android:layout_marginTop="5dp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,SmallSp" />
 
             <TextView
                 android:id="@+id/tvTag3"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="8sp"
                 android:background="@drawable/edittext_border"
                 android:layout_marginStart="10dp"
                 android:textAlignment="center"
                 android:text="#Tag 3"
                 android:textStyle="bold"
-                android:textColor="@color/blue"
+                android:textColor="#0800FF"
+                android:paddingHorizontal="3dp"
                 android:layout_marginTop="5dp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,SmallSp" />
+
+            <TextView
+                android:id="@+id/tvTag4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:background="@drawable/edittext_border"
+                android:layout_marginStart="10dp"
+                android:textAlignment="center"
+                android:text="#Tag 4"
+                android:textStyle="bold"
+                android:textColor="#0800FF"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="3dp"
+                tools:ignore="HardcodedText,SmallSp" />
         </LinearLayout>
 
     </LinearLayout>

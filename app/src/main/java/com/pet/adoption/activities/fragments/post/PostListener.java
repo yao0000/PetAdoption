@@ -1,27 +1,63 @@
 package com.pet.adoption.activities.fragments.post;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.ArrayRes;
 
 import com.pet.adoption.R;
 
-import java.util.List;
-
 public class PostListener {
 
-    private Context context;
-    private Spinner sp_type, sp_size, sp_species;
-    private String[] arr_empty = getArrayString(R.array.array_empty);
+    private final Context context;
+    private final Spinner sp_type;
+    private final Spinner sp_size;
+    private final Spinner sp_species;
+    private final String[] arr_empty;
 
-    public PostListener(View view){
+    public PostListener(View view) {
+
+        context = view.getContext();
+        arr_empty = getArrayString(R.array.array_empty);
         sp_type = view.findViewById(R.id.spinner_type);
         sp_size = view.findViewById(R.id.spinner_size);
         sp_species = view.findViewById(R.id.spinner_species);
+    }
+
+    public View.OnTouchListener getSp_species_touch_listener(){
+        View.OnTouchListener sp_species_touch_listener;
+        sp_species_touch_listener = new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (sp_species.getAdapter().getCount() != 1){
+                    return false;
+                }
+
+                if (sp_type.getSelectedItemPosition() == 0){
+                    Toast.makeText(context,
+                            "Please select value for Pet Type",
+                            Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                if (sp_size.getSelectedItemPosition() == 0){
+                    Toast.makeText(context,
+                            "Please select value for Size of Pet",
+                            Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                return true;
+            }
+        };
+
+        return sp_species_touch_listener;
     }
 
     public AdapterView.OnItemSelectedListener getSp_type_selected_listener() {
@@ -32,7 +68,7 @@ public class PostListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-                    setSpinnerEntries(sp_species, arr_empty);
+                    setSpinnerEntries(arr_empty);
                     return;
                 }
 
@@ -45,20 +81,7 @@ public class PostListener {
                             getArrayString(R.array.array_species_breed_cat_large)
                     };
 
-                    setSpinnerEntries(sp_species, value[index]);
-                    /*
-                    if (index == 0){ // none
-                        setSpinnerEntries(sp_species, R.array.array_empty);
-                    }
-                    else if (index == 1){ // small
-                        setSpinnerEntries(sp_species, R.array.array_species_breed_cat_small);
-                    }
-                    else if (index  == 2){ // medium
-                        setSpinnerEntries(sp_species, R.array.array_species_breed_cat_medium);
-                    }
-                    else if (index == 3){
-                        setSpinnerEntries(sp_species, R.array.array_species_breed_cat_large);
-                    }*/
+                    setSpinnerEntries(value[index]);
                 }
                 else if (position == 2){ // dog
 
@@ -69,7 +92,7 @@ public class PostListener {
                             getArrayString(R.array.array_species_breed_dog_large)
                     };
 
-                    setSpinnerEntries(sp_species, value[index]);
+                    setSpinnerEntries(value[index]);
                 }
             }
 
@@ -88,7 +111,34 @@ public class PostListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-                    setSpinnerEntries(sp_species, arr_empty);
+                    setSpinnerEntries(arr_empty);
+                    return;
+                }
+
+                int index = sp_type.getSelectedItemPosition();
+                if (position == 1){ // small
+                    String[][] value = {
+                            getArrayString(R.array.array_empty),
+                            getArrayString(R.array.array_species_breed_cat_small),
+                            getArrayString(R.array.array_species_breed_dog_small)
+                    };
+                    setSpinnerEntries(value[index]);
+                }
+                else if (position == 2){ //medium
+                    String[][] value = {
+                            getArrayString(R.array.array_empty),
+                            getArrayString(R.array.array_species_breed_cat_medium),
+                            getArrayString(R.array.array_species_breed_dog_medium)
+                    };
+                    setSpinnerEntries(value[index]);
+                }
+                else if (position == 3){ //large
+                    String[][] value = {
+                            getArrayString(R.array.array_empty),
+                            getArrayString(R.array.array_species_breed_cat_large),
+                            getArrayString(R.array.array_species_breed_dog_large)
+                    };
+                    setSpinnerEntries(value[index]);
                 }
             }
 
@@ -106,10 +156,9 @@ public class PostListener {
         return context.getResources().getStringArray(id);
     }
 
-    private void setSpinnerEntries(Spinner spinner, String[] values){
-        //String[] values = context.getResources().getStringArray(id);
+    private void setSpinnerEntries(String[] values){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, values);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        sp_species.setAdapter(adapter);
     }
 }

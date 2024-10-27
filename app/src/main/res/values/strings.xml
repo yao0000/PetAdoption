@@ -35,6 +35,7 @@
     <string name="title_fragment_post">Post a Pet for Adoption</string>
     <string name="post_desc">Found a stray pet but can’t provide a home? Share the details here and help connect them with someone who can. Please fill out the information below to create a post for this pet.</string>
     <string name="submit">Submit</string>
+    <string name="please_select">--Please Select--</string>
 
 
     <string-array name="array_empty">
@@ -57,9 +58,9 @@
 
     <string-array name="array_pet_size">
         <item>---Please Select---</item>
-        <item>Small breed</item>
-        <item>Medium breed</item>
-        <item>Large breed</item>
+        <item>Small Breed</item>
+        <item>Medium Breed</item>
+        <item>Large Breed</item>
     </string-array>
 
     <string-array name="array_species_breed_dog_small">

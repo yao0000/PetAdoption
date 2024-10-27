@@ -1,12 +1,9 @@
 package com.pet.adoption.entities;
 
-import java.util.List;
-
 public class PetInfo {
+
     private String time;
-    private List<String> tags;
     private String fileName;
-    private String ownerUID;
 
     private String name;
     private String age;
@@ -15,19 +12,26 @@ public class PetInfo {
     private String species;
     private String status;
     private String contact;
-    private Boolean gender;
+    private String gender;
     private String state;
     private String description;
 
-    public PetInfo(String time, String description, List<String> tags, String fileName, String ownerUID) {
-        this.time = time;
-        this.description = description;
-        this.tags = tags;
-        this.fileName = fileName;
-        this.ownerUID = ownerUID;
+    public PetInfo() {
     }
 
-    public PetInfo() {
+    public PetInfo(String time, String fileName, String name, String age, String type, String size, String species, String status, String contact, String gender, String state, String description) {
+        this.time = time;
+        this.fileName = fileName;
+        this.name = name;
+        this.age = age;
+        this.type = type;
+        this.size = size;
+        this.species = species;
+        this.status = status;
+        this.contact = contact;
+        this.gender = gender;
+        this.state = state;
+        this.description = description;
     }
 
     public String getTime() {
@@ -38,26 +42,6 @@ public class PetInfo {
         this.time = time;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public String getTagByIndex(int index){
-        return tags.get(index);
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
     public String getFileName() {
         return fileName;
     }
@@ -66,11 +50,83 @@ public class PetInfo {
         this.fileName = fileName;
     }
 
-    public String getOwnerUID() {
-        return ownerUID;
+    public String getName() {
+        return name;
     }
 
-    public void setOwnerUID(String ownerUID) {
-        this.ownerUID = ownerUID;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,5 +1,6 @@
 package com.pet.adoption.entities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,23 +39,29 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
         return new PetInfoViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PetInfoAdapter.PetInfoViewHolder holder, int position) {
         PetInfo info = list.get(position);
 
         holder.tvTime.setText(info.getTime());
         holder.tvDescription.setText(info.getDescription());
-        holder.tvTag1.setText(info.getTagByIndex(0));
-        holder.tvTag2.setText(info.getTagByIndex(1));
-        holder.tvTag3.setText(info.getTagByIndex(2));
+        holder.tvTag1.setText("#" + info.getSpecies());
+        holder.tvTag2.setText("#" + info.getStatus());
+        holder.tvTag3.setText("#" + info.getGender());
+        holder.tvTag4.setText("#" + info.getSize());
 
-        StorageReference ref = FirebaseStorage.getInstance().getReference(info.getFileName());
+
+        StorageReference ref = FirebaseStorage.getInstance().getReference("images").child(info.getFileName());
+        File file = null;
         try {
-            File local = File.createTempFile("temp", ".jpg");
-            ref.getFile(local)
+            file = File.createTempFile(info.getFileName(), "");
+            File finalFile = file;
+            ref.getFile(file)
                     .addOnCompleteListener(taskSnapshot -> {
-                        Bitmap bitmap = BitmapFactory.decodeFile(local.getAbsolutePath());
-                        ((ImageView)holder.imageView).setImageBitmap(bitmap);
+                        
+                        Bitmap bitmap = BitmapFactory.decodeFile(finalFile.getAbsolutePath());
+                        holder.imageView.setImageBitmap(bitmap);
                     })
                     .addOnFailureListener(task -> {
                         Toast.makeText(context
@@ -66,6 +73,11 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
                     , e.getMessage()
                     , Toast.LENGTH_SHORT).show();
         }
+        finally {
+            if (file != null && file.exists()){
+                Boolean deleted = file.delete();
+            }
+        }
     }
 
     @Override
@@ -75,7 +87,7 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
 
     public static class PetInfoViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView tvTime, tvDescription, tvTag1, tvTag2, tvTag3;
+        TextView tvTime, tvDescription, tvTag1, tvTag2, tvTag3, tvTag4;
 
         public PetInfoViewHolder(View item){
             super(item);
@@ -85,6 +97,7 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
             tvTag1 = item.findViewById(R.id.tvTag1);
             tvTag2 = item.findViewById(R.id.tvTag2);
             tvTag3 = item.findViewById(R.id.tvTag3);
+            tvTag4 = item.findViewById(R.id.tvTag4);
         }
     }
 }
