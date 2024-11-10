@@ -1,4 +1,4 @@
-package com.pet.adoption.activities.fragments.post;
+package com.pet.adoption.services;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,19 +12,27 @@ import android.widget.Toast;
 import androidx.annotation.ArrayRes;
 
 import com.pet.adoption.R;
+import com.pet.adoption.activities.fragments.pet.PetFragment;
+import com.pet.adoption.activities.fragments.post.PostFragment;
 
-public class PostListener {
+public class CommonListener {
 
     private final Context context;
     private final Spinner sp_type;
     private final Spinner sp_size;
     private final Spinner sp_species;
     private final String[] arr_empty;
+    private Class<?> cls;
 
-    public PostListener(View view) {
-
+    public CommonListener(View view, Class<?> cls) {
+        this.cls = cls;
         context = view.getContext();
-        arr_empty = getArrayString(R.array.array_empty);
+
+        if (cls == PostFragment.class)
+            arr_empty = getArrayString(R.array.array_empty);
+        else
+            arr_empty = new String[]{"Species"};
+
         sp_type = view.findViewById(R.id.spinner_type);
         sp_size = view.findViewById(R.id.spinner_size);
         sp_species = view.findViewById(R.id.spinner_species);
@@ -75,7 +83,7 @@ public class PostListener {
                 int index = sp_size.getSelectedItemPosition();
                 if (position == 1){ // Cat
                     String[][] value = {
-                            getArrayString(R.array.array_empty),
+                            arr_empty,
                             getArrayString(R.array.array_species_breed_cat_small),
                             getArrayString(R.array.array_species_breed_cat_medium),
                             getArrayString(R.array.array_species_breed_cat_large)
@@ -86,7 +94,7 @@ public class PostListener {
                 else if (position == 2){ // dog
 
                     String[][] value = {
-                            getArrayString(R.array.array_empty),
+                            arr_empty,
                             getArrayString(R.array.array_species_breed_dog_small),
                             getArrayString(R.array.array_species_breed_dog_medium),
                             getArrayString(R.array.array_species_breed_dog_large)
@@ -118,7 +126,7 @@ public class PostListener {
                 int index = sp_type.getSelectedItemPosition();
                 if (position == 1){ // small
                     String[][] value = {
-                            getArrayString(R.array.array_empty),
+                            arr_empty,
                             getArrayString(R.array.array_species_breed_cat_small),
                             getArrayString(R.array.array_species_breed_dog_small)
                     };
@@ -126,7 +134,7 @@ public class PostListener {
                 }
                 else if (position == 2){ //medium
                     String[][] value = {
-                            getArrayString(R.array.array_empty),
+                            arr_empty,
                             getArrayString(R.array.array_species_breed_cat_medium),
                             getArrayString(R.array.array_species_breed_dog_medium)
                     };
@@ -134,7 +142,7 @@ public class PostListener {
                 }
                 else if (position == 3){ //large
                     String[][] value = {
-                            getArrayString(R.array.array_empty),
+                            arr_empty,
                             getArrayString(R.array.array_species_breed_cat_large),
                             getArrayString(R.array.array_species_breed_dog_large)
                     };
@@ -153,7 +161,10 @@ public class PostListener {
 
     private String[] getArrayString(@ArrayRes int id){
         assert context != null;
-        return context.getResources().getStringArray(id);
+        String[] values = context.getResources().getStringArray(id);
+        if (cls == PetFragment.class)
+            values[0] = "Species";
+        return values;
     }
 
     private void setSpinnerEntries(String[] values){

@@ -1,6 +1,7 @@
-package com.pet.adoption.activities.fragments;
+package com.pet.adoption.activities.fragments.profile;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
 
@@ -27,12 +27,18 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         onLoad(view);
-        setEvent(view);
         return view;
     }
 
     @SuppressLint("SetTextI18n")
     private void onLoad(View v){
+        v.findViewById(R.id.ll_log_out).setOnClickListener(e -> {
+            FirebaseAuth.getInstance().signOut();
+
+        });
+        v.findViewById(R.id.ll_saved).setOnClickListener(e -> {
+            startActivity(new Intent(requireContext(), SavedPageActivity.class));
+        });
         TextView tv_username = v.findViewById(R.id.tv_username);
 
         FirebaseFirestore.getInstance()
@@ -58,19 +64,5 @@ public class ProfileFragment extends Fragment {
                     assert acc != null;
                     tv_username.setText("Hi, " + acc.getUsername());
                 });
-    }
-
-    private void setEvent(View v){
-        v.findViewById(R.id.ll_log_out).setOnClickListener(e -> Objects.requireNonNull(FirebaseAuth.getInstance()
-                        .getCurrentUser())
-                .delete()
-                .addOnCompleteListener(task -> {
-                    Toast.makeText(requireContext()
-                            , "Delete account done"
-                            , Toast.LENGTH_SHORT).show();
-
-                    FirebaseAuth.getInstance()
-                            .signOut();
-                }));
     }
 }

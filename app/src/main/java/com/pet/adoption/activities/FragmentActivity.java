@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pet.adoption.activities.fragments.home.HomeFragment;
 import com.pet.adoption.activities.fragments.pet.PetFragment;
 import com.pet.adoption.activities.fragments.post.PostFragment;
-import com.pet.adoption.activities.fragments.ProfileFragment;
+import com.pet.adoption.activities.fragments.profile.ProfileFragment;
 import com.pet.adoption.R;
 
 public class FragmentActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class FragmentActivity extends AppCompatActivity {
         ((BottomNavigationView)findViewById(R.id.bottomNavigationView))
                 .setOnNavigationItemSelectedListener(listener);
 
-        commitFragment(new PostFragment());
+        commitFragment(new HomeFragment());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -63,6 +63,17 @@ public class FragmentActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.frame_layout, fragment)
                 .commit();
+    }
+
+    public void addFragment(@NonNull Fragment fragment){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void popFragment(){
+        getSupportFragmentManager().popBackStack();
     }
 
 }

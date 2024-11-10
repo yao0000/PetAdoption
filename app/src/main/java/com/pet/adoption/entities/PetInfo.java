@@ -1,9 +1,12 @@
 package com.pet.adoption.entities;
 
-public class PetInfo {
+import java.io.Serializable;
 
-    private String time;
+public class PetInfo implements Serializable {
+
+    private String postingTime;
     private String fileName;
+    private String petInfoUID;
 
     private String name;
     private String age;
@@ -15,12 +18,16 @@ public class PetInfo {
     private String gender;
     private String state;
     private String description;
+    private String publisherUID;
 
     public PetInfo() {
     }
 
-    public PetInfo(String time, String fileName, String name, String age, String type, String size, String species, String status, String contact, String gender, String state, String description) {
-        this.time = time;
+    public PetInfo(String postingTime, String fileName, String name, String age, String type, String size,
+                   String species, String status, String contact, String gender,
+                   String state, String description, String publisherUID) {
+        this.petInfoUID = publisherUID + "_" + System.currentTimeMillis();
+        this.postingTime = postingTime;
         this.fileName = fileName;
         this.name = name;
         this.age = age;
@@ -32,14 +39,23 @@ public class PetInfo {
         this.gender = gender;
         this.state = state;
         this.description = description;
+        this.publisherUID = publisherUID;
     }
 
-    public String getTime() {
-        return time;
+    public String getPetInfoUID() {
+        return petInfoUID;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setPetInfoUID(String petInfoUID) {
+        this.petInfoUID = petInfoUID;
+    }
+
+    public String getPostingTime() {
+        return postingTime;
+    }
+
+    public void setPostingTime(String postingTime) {
+        this.postingTime = postingTime;
     }
 
     public String getFileName() {
@@ -128,5 +144,13 @@ public class PetInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPublisherUID() {
+        return publisherUID;
+    }
+
+    public void setPublisherUID(String publisherUID) {
+        this.publisherUID = publisherUID;
     }
 }

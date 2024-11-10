@@ -32,6 +32,7 @@ import com.pet.adoption.R;
 import com.pet.adoption.activities.FragmentActivity;
 import com.pet.adoption.activities.fragments.pet.PetFragment;
 import com.pet.adoption.entities.PetInfo;
+import com.pet.adoption.services.CommonListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,7 +49,7 @@ public class PostFragment extends Fragment {
     private static final int PICK_IMG = 101;
     private Uri imgUri;
     private String filename;
-    private PostListener listener;
+    private CommonListener listener;
 
     private TextView tv_pic_selection;
     private EditText et_name, et_contact, et_desc;
@@ -59,7 +60,7 @@ public class PostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post, container, false);
-        listener = new PostListener(view);
+        listener = new CommonListener(view, getClass());
         onLoad(view);
         return view;
     }
@@ -183,7 +184,8 @@ public class PostFragment extends Fragment {
 
         PetInfo info = new PetInfo(time, filename, name, age, type, size,
                 species, status, contact,
-                gender, state, description);
+                gender, state, description,
+                FirebaseAuth.getInstance().getUid());
 
         FirebaseFirestore.getInstance()
                 .collection("pets")

@@ -2,9 +2,11 @@ package com.pet.adoption.entities;
 
 
 public class Account {
+
+    private String userUID;
     private String email;
     private String username;
-    private String userUID;
+    private String password;
 
     public Account(String email, String username, String userUID) {
         this.email = email;

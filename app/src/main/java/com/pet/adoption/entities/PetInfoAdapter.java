@@ -2,13 +2,12 @@ package com.pet.adoption.entities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,15 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pet.adoption.R;
+import com.pet.adoption.activities.fragments.pet.PetDetailsActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoViewHolder>{
+public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
 
-    private Context context;
-    private List<PetInfo> list;
+    private final Context context;
+    private final List<PetInfo> list;
 
     public PetInfoAdapter(Context context, List<PetInfo> list) {
         this.context = context;
@@ -34,17 +34,25 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
 
     @NonNull
     @Override
-    public PetInfoAdapter.PetInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PetInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_pet_info, parent, false);
         return new PetInfoViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull PetInfoAdapter.PetInfoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PetInfoViewHolder holder, int position) {
         PetInfo info = list.get(position);
-
-        holder.tvTime.setText(info.getTime());
+        holder.ll_item_pet.setOnClickListener(e -> {
+            if (!holder.isImageLoad){
+                Toast.makeText(context, "Item is loading, please wait", Toast.LENGTH_LONG).show();
+                return;
+            }
+            Intent intent = new Intent(context, PetDetailsActivity.class);
+            intent.putExtra("data", info);
+            context.startActivity(intent);
+        });
+        holder.tvTime.setText(info.getPostingTime());
         holder.tvDescription.setText(info.getDescription());
         holder.tvTag1.setText("#" + info.getSpecies());
         holder.tvTag2.setText("#" + info.getStatus());
@@ -59,9 +67,9 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
             File finalFile = file;
             ref.getFile(file)
                     .addOnCompleteListener(taskSnapshot -> {
-                        
                         Bitmap bitmap = BitmapFactory.decodeFile(finalFile.getAbsolutePath());
                         holder.imageView.setImageBitmap(bitmap);
+                        holder.isImageLoad = true;
                     })
                     .addOnFailureListener(task -> {
                         Toast.makeText(context
@@ -85,19 +93,4 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoAdapter.PetInfoV
         return list.size();
     }
 
-    public static class PetInfoViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView tvTime, tvDescription, tvTag1, tvTag2, tvTag3, tvTag4;
-
-        public PetInfoViewHolder(View item){
-            super(item);
-            imageView = item.findViewById(R.id.ivPetImage);
-            tvTime = item.findViewById(R.id.tvTime);
-            tvDescription = item.findViewById(R.id.tvDescription);
-            tvTag1 = item.findViewById(R.id.tvTag1);
-            tvTag2 = item.findViewById(R.id.tvTag2);
-            tvTag3 = item.findViewById(R.id.tvTag3);
-            tvTag4 = item.findViewById(R.id.tvTag4);
-        }
-    }
 }
