@@ -9,9 +9,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.pet.adoption.entities.Account;
 import com.pet.adoption.R;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity{
     private EditText etEmail, etPassword;
@@ -22,7 +21,6 @@ public class LoginActivity extends AppCompatActivity{
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         onLoad();
-        setListener();
     }
 
     @Override
@@ -35,11 +33,12 @@ public class LoginActivity extends AppCompatActivity{
     private void onLoad(){
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
         mAuth = FirebaseAuth.getInstance();
+
+        setEventListener();
     }
 
-    private void setListener(){
+    private void setEventListener(){
         findViewById(R.id.btnLogin).setOnClickListener(e -> btnLogin_Click());
         findViewById(R.id.tvRegister).setOnClickListener(e -> tvRegister_Click());
     }
@@ -48,16 +47,18 @@ public class LoginActivity extends AppCompatActivity{
         String email = String.valueOf(etEmail.getText());
         String password = String.valueOf(etPassword.getText());
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        Account account = new Account(email, password);
+        account.login()
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()){
                         Toast.makeText(LoginActivity.this
-                                , Objects.requireNonNull(task.getException()).getMessage()
-                               , Toast.LENGTH_SHORT).show();
+                                , task.getException().getMessage()
+                                , Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     startActivity(new Intent(LoginActivity.this, FragmentActivity.class));
+                    finish();
                 });
     }
 

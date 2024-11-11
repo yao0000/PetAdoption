@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pet.adoption.R;
 
 public class PetInfoViewHolder  extends RecyclerView.ViewHolder {
-    ImageView imageView;
-    TextView tvTime, tvDescription, tvTag1, tvTag2, tvTag3, tvTag4;
-    LinearLayout ll_item_pet;
-    boolean isImageLoad = false;
+    private ImageView imageView;
+    private TextView tvTime, tvDescription, tvTag1, tvTag2, tvTag3, tvTag4;
+    private LinearLayout ll_item_pet;
+    private boolean isImageLoad = false;
 
     public PetInfoViewHolder(View item){
         super(item);
@@ -25,5 +25,45 @@ public class PetInfoViewHolder  extends RecyclerView.ViewHolder {
         tvTag2 = item.findViewById(R.id.tvTag2);
         tvTag3 = item.findViewById(R.id.tvTag3);
         tvTag4 = item.findViewById(R.id.tvTag4);
+    }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public TextView getTvTime() {
+        return tvTime;
+    }
+
+    public TextView getTvDescription() {
+        return tvDescription;
+    }
+
+    public TextView getTvTag1() {
+        return tvTag1;
+    }
+
+    public TextView getTvTag2() {
+        return tvTag2;
+    }
+
+    public TextView getTvTag3() {
+        return tvTag3;
+    }
+
+    public TextView getTvTag4() {
+        return tvTag4;
+    }
+
+    public LinearLayout getLl_item_pet() {
+        return ll_item_pet;
+    }
+
+    public boolean isImageLoad() {
+        return isImageLoad;
+    }
+
+    public void setImageLoad(boolean imageLoad) {
+        isImageLoad = imageLoad;
     }
 }

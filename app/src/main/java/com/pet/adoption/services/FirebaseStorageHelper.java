@@ -1,5 +1,4 @@
 package com.pet.adoption.services;
 
-public class GoogleFirebase {
-    
+public class FirebaseStorageHelper {
 }

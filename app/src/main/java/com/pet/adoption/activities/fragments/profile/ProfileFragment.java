@@ -15,8 +15,10 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.pet.adoption.activities.MainActivity;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
+import com.pet.adoption.services.FirebaseAuthHelper;
 
 import java.util.Objects;
 
@@ -32,13 +34,7 @@ public class ProfileFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void onLoad(View v){
-        v.findViewById(R.id.ll_log_out).setOnClickListener(e -> {
-            FirebaseAuth.getInstance().signOut();
 
-        });
-        v.findViewById(R.id.ll_saved).setOnClickListener(e -> {
-            startActivity(new Intent(requireContext(), SavedPageActivity.class));
-        });
         TextView tv_username = v.findViewById(R.id.tv_username);
 
         FirebaseFirestore.getInstance()
@@ -64,5 +60,23 @@ public class ProfileFragment extends Fragment {
                     assert acc != null;
                     tv_username.setText("Hi, " + acc.getUsername());
                 });
+
+        setEventHandler(v);
+    }
+
+    private void setEventHandler(View v){
+        v.findViewById(R.id.ll_log_out).setOnClickListener(e -> onClickLogOut());
+        v.findViewById(R.id.ll_saved).setOnClickListener(e -> onClickBtnSaved());
+    }
+
+    private void onClickBtnSaved(){
+        startActivity(new Intent(requireContext(), SavedPageActivity.class));
+    }
+
+    private void onClickLogOut(){
+        new FirebaseAuthHelper().signOut();
+        Intent intent = new Intent(getActivity(), MainActivity.class);  // Replace with your main activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

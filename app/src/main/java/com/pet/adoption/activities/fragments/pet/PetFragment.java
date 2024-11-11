@@ -1,11 +1,8 @@
 package com.pet.adoption.activities.fragments.pet;
 
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.ArrayRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +20,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.pet.adoption.R;
 import com.pet.adoption.services.CommonListener;
 import com.pet.adoption.entities.PetInfo;
-import com.pet.adoption.entities.PetInfoAdapter;
+import com.pet.adoption.services.PetSearchFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +32,9 @@ public class PetFragment extends Fragment {
     List<PetInfo> list;
     private static PetFragment instance;
     private String[] arr_countries;
+    private PetSearchFilter filter;
+    private Spinner sp_state, sp_size, sp_age, sp_type, sp_species, sp_gender;
+    CommonListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +42,7 @@ public class PetFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_pet, container, false);
         list = new ArrayList<>();
         instance = this;
+        filter = new PetSearchFilter(getContext());
         onLoad(v);
         return v;
     }
@@ -49,29 +50,32 @@ public class PetFragment extends Fragment {
     private void onLoad(View v) {
         v.findViewById(R.id.tv_back).setVisibility(View.GONE);
         this.arr_countries = getArrayById(R.array.array_states, "Whole Country");
-        CommonListener listener = new CommonListener(v, getClass());
+        listener = new CommonListener(v, getClass());
         recyclerView = v.findViewById(R.id.recyclerView);
         getPetInfoListFromDB();
-        Spinner sp_type = v.findViewById(R.id.spinner_type);
-        Spinner sp_species = v.findViewById(R.id.spinner_species);
-        Spinner sp_age = v.findViewById(R.id.spinner_age);
-        Spinner sp_size = v.findViewById(R.id.spinner_size);
+        sp_type = v.findViewById(R.id.spinner_type);
+        sp_species = v.findViewById(R.id.spinner_species);
+        sp_age = v.findViewById(R.id.spinner_age);
+        sp_size = v.findViewById(R.id.spinner_size);
+        sp_gender = v.findViewById(R.id.spinner_gender);
 
         sp_type.setAdapter(getAdapter(R.array.array_pet_type, "Type"));
-        sp_species.setAdapter(getAdapter(R.array.array_empty, "Less"));
+        sp_species.setAdapter(getAdapter(R.array.array_empty, "Species"));
         sp_age.setAdapter(getAdapter(R.array.array_pet_age, "Age"));
         sp_size.setAdapter(getAdapter(R.array.array_pet_size, "Size"));
+        sp_gender.setAdapter(getAdapter(R.array.array_gender, "Gender"));
 
-        sp_type.setOnItemSelectedListener(listener.getSp_type_selected_listener());
-        sp_size.setOnItemSelectedListener(listener.getSp_size_selected_listener());
+        sp_type.setOnItemSelectedListener(spinnerListener);
+        sp_size.setOnItemSelectedListener(spinnerListener);
+        sp_age.setOnItemSelectedListener(spinnerListener);
+        sp_species.setOnItemSelectedListener(spinnerListener);
         sp_species.setOnTouchListener(listener.getSp_species_touch_listener());
 
         ArrayAdapter<String> adapter = getAdapter(R.array.array_states, "Whole Country");
-        Spinner countrySpinner = v.findViewById(R.id.spinner_country); // Replace with your Spinner ID
+        sp_state = v.findViewById(R.id.spinner_country); // Replace with your Spinner ID
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        countrySpinner.setAdapter(adapter);
-        //listener1 = new PetSpinnerListener(v);
-        countrySpinner.setOnItemSelectedListener(getSpinnerCountry());
+        sp_state.setAdapter(adapter);
+        sp_state.setOnItemSelectedListener(spinnerListener);
     }
 
     public static PetFragment getInstance() {
@@ -129,32 +133,28 @@ public class PetFragment extends Fragment {
         return adapter;
     }
 
-    public AdapterView.OnItemSelectedListener getSpinnerCountry(){
-        AdapterView.OnItemSelectedListener listener;
-
-        listener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0){
-                    displayList(list);
-                    return;
-                }
-
-                List<PetInfo> filterList = new ArrayList<>();
-
-                for(PetInfo info : list){
-                    if (Objects.equals(info.getState(), arr_countries[position]))
-                        filterList.add(info);
-                }
-                displayList(filterList);
+    private final AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (parent == sp_type){
+                listener.valueChangeSPType();
+            }
+            else if (parent == sp_size){
+                listener.valueChangeSPSize();
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            List<PetInfo> filteredList = filter.filter(list,
+                    sp_type.getSelectedItemPosition(), sp_age.getSelectedItemPosition(),
+                    sp_size.getSelectedItemPosition(), sp_state.getSelectedItemPosition(),
+                    sp_species.getSelectedItemPosition(),
+                    sp_gender.getSelectedItemPosition());
 
-            }
-        };
+            displayList(filteredList);
+        }
 
-        return listener;
-    }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 }

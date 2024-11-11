@@ -1,7 +1,9 @@
 package com.pet.adoption.activities.fragments.pet;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,13 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pet.adoption.R;
@@ -24,8 +30,11 @@ import com.pet.adoption.entities.PetInfo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class PetDetailsActivity extends AppCompatActivity {
@@ -50,6 +59,7 @@ public class PetDetailsActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void onLoad(){
         ll_save = findViewById(R.id.ll_saved);
+        tv_save = findViewById(R.id.tv_save);
         loadSaveStatus();
         setEventHandler();
         setDefaultValue();
@@ -121,19 +131,64 @@ public class PetDetailsActivity extends AppCompatActivity {
     private void setEventHandler(){
         findViewById(R.id.tv_back).setOnClickListener(e -> finish());
         findViewById(R.id.ll_saved).setOnClickListener(e -> onClickBtnSave());
+        findViewById(R.id.ll_whatsapp).setOnClickListener(e -> onClickBtnWhatsApp());
     }
 
     private void onClickBtnSave(){
-        FirebaseFirestore.getInstance()
+        DocumentReference ref = FirebaseFirestore.getInstance()
                 .collection("save")
-                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .get()
+                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
+
+        ref.get()
                 .addOnSuccessListener(snapshot -> {
-                    if (!snapshot.exists()) return;
+                    if (!snapshot.exists()) {
+                        List<String> list = new ArrayList<>();
+                        list.add(info.getPetInfoUID());
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("list", list);
+                        ref.set(map)
+                                .addOnSuccessListener(aVoid -> {
+                                    updateSaveButtonLayout(R.color.green);
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(PetDetailsActivity.this,
+                                            e.getMessage(),
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                });
+                        return;
+                    }
 
                     List<String> uidList = (List<String>) snapshot.get("list");
                     if (uidList == null)
                         uidList = Collections.emptyList();
+
+                    if (tv_save.getText().toString().equals("Save")){ // add to firebase
+                        if (!uidList.contains(info.getPetInfoUID())){
+                            ref.update("list", FieldValue.arrayUnion(info.getPetInfoUID()))
+                                    .addOnSuccessListener(aVoid -> {
+                                        updateSaveButtonLayout(R.color.green);
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(PetDetailsActivity.this,
+                                                        e.getMessage(),
+                                                        Toast.LENGTH_LONG)
+                                                .show();
+                                    });
+                        }
+                    }
+                    else{ // remove from firebase
+                        ref.update("list", FieldValue.arrayRemove(info.getPetInfoUID()))
+                                .addOnSuccessListener(aVoid -> {
+                                    updateSaveButtonLayout(R.color.yellow);
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(PetDetailsActivity.this,
+                                            e.getMessage(),
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                });
+                    }
                 });
     }
 
@@ -151,9 +206,36 @@ public class PetDetailsActivity extends AppCompatActivity {
                         return;
 
                     if (saveList.contains(info.getPetInfoUID())){
-                        ll_save.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.green));
+                        updateSaveButtonLayout(R.color.green);
                     }
                 });
+    }
+
+    private void updateSaveButtonLayout(@ColorRes int id){
+        ll_save.setBackgroundTintList(ContextCompat.getColorStateList(this, id));
+        if (id == R.color.yellow){
+            tv_save.setText("Save");
+        }
+        else
+            tv_save.setText("Saved");
+    }
+
+    private void onClickBtnWhatsApp(){
+        try{
+            Uri uri = Uri.parse("http://wa.me" + info.getContact());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage("com.whatsapp");
+
+            if (intent.resolveActivity(getPackageManager()) != null){
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this, "WhatsApp is not installed on your device", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch(Exception e){
+            Toast.makeText(this, "Error opening WhatsApp chat", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

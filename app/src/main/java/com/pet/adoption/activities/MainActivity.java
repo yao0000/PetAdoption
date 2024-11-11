@@ -1,12 +1,9 @@
-package com.pet.adoption;
+package com.pet.adoption.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.pet.adoption.activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

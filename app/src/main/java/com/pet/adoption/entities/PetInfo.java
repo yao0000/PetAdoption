@@ -1,12 +1,16 @@
 package com.pet.adoption.entities;
 
+import com.google.android.gms.tasks.Task;
+import com.pet.adoption.services.FirestoreHelper;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 public class PetInfo implements Serializable {
 
-    private String postingTime;
     private String fileName;
     private String petInfoUID;
+    private long timeStamp;
 
     private String name;
     private String age;
@@ -23,11 +27,11 @@ public class PetInfo implements Serializable {
     public PetInfo() {
     }
 
-    public PetInfo(String postingTime, String fileName, String name, String age, String type, String size,
+    public PetInfo(String fileName, String name, String age, String type, String size,
                    String species, String status, String contact, String gender,
                    String state, String description, String publisherUID) {
         this.petInfoUID = publisherUID + "_" + System.currentTimeMillis();
-        this.postingTime = postingTime;
+        this.timeStamp = System.currentTimeMillis();
         this.fileName = fileName;
         this.name = name;
         this.age = age;
@@ -50,12 +54,17 @@ public class PetInfo implements Serializable {
         this.petInfoUID = petInfoUID;
     }
 
-    public String getPostingTime() {
-        return postingTime;
+    public long getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setPostingTime(String postingTime) {
-        this.postingTime = postingTime;
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getPostingTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(timeStamp);
     }
 
     public String getFileName() {
@@ -152,5 +161,10 @@ public class PetInfo implements Serializable {
 
     public void setPublisherUID(String publisherUID) {
         this.publisherUID = publisherUID;
+    }
+
+    public Task<Void> post(){
+        FirestoreHelper helper = new FirestoreHelper();
+        return helper.upload("pets", petInfoUID, this);
     }
 }

@@ -1,4 +1,4 @@
-package com.pet.adoption.entities;
+package com.pet.adoption.activities.fragments.pet;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pet.adoption.R;
-import com.pet.adoption.activities.fragments.pet.PetDetailsActivity;
+import com.pet.adoption.entities.PetInfo;
+import com.pet.adoption.entities.PetInfoViewHolder;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,8 +44,8 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull PetInfoViewHolder holder, int position) {
         PetInfo info = list.get(position);
-        holder.ll_item_pet.setOnClickListener(e -> {
-            if (!holder.isImageLoad){
+        holder.getLl_item_pet().setOnClickListener(e -> {
+            if (!holder.isImageLoad()){
                 Toast.makeText(context, "Item is loading, please wait", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -52,12 +53,12 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
             intent.putExtra("data", info);
             context.startActivity(intent);
         });
-        holder.tvTime.setText(info.getPostingTime());
-        holder.tvDescription.setText(info.getDescription());
-        holder.tvTag1.setText("#" + info.getSpecies());
-        holder.tvTag2.setText("#" + info.getStatus());
-        holder.tvTag3.setText("#" + info.getGender());
-        holder.tvTag4.setText("#" + info.getSize());
+        holder.getTvTime().setText(info.getPostingTime());
+        holder.getTvDescription().setText(info.getDescription());
+        holder.getTvTag1().setText("#" + info.getSpecies());
+        holder.getTvTag2().setText("#" + info.getStatus());
+        holder.getTvTag3().setText("#" + info.getGender());
+        holder.getTvTag4().setText("#" + info.getSize());
 
 
         StorageReference ref = FirebaseStorage.getInstance().getReference("images").child(info.getFileName());
@@ -68,8 +69,8 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
             ref.getFile(file)
                     .addOnCompleteListener(taskSnapshot -> {
                         Bitmap bitmap = BitmapFactory.decodeFile(finalFile.getAbsolutePath());
-                        holder.imageView.setImageBitmap(bitmap);
-                        holder.isImageLoad = true;
+                        holder.getImageView().setImageBitmap(bitmap);
+                        holder.setImageLoad(true);
                     })
                     .addOnFailureListener(task -> {
                         Toast.makeText(context

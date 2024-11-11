@@ -1,6 +1,10 @@
 package com.pet.adoption.entities;
 
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.pet.adoption.services.FirebaseAuthHelper;
+
 public class Account {
 
     private String userUID;
@@ -8,10 +12,15 @@ public class Account {
     private String username;
     private String password;
 
-    public Account(String email, String username, String userUID) {
+    public Account(String email, String password, String username) {
         this.email = email;
+        this.password = password;
         this.username = username;
-        this.userUID = userUID;
+    }
+
+    public Account(String email, String password){
+        this.email = email;
+        this.password = password;
     }
 
     public Account() {
@@ -39,5 +48,15 @@ public class Account {
 
     public void setUserUID(String userUID) {
         this.userUID = userUID;
+    }
+
+    public Task<AuthResult> signUp(){
+        FirebaseAuthHelper helper = new FirebaseAuthHelper();
+        return helper.signUp(email, password);
+    }
+
+    public Task<AuthResult> login(){
+        FirebaseAuthHelper helper = new FirebaseAuthHelper();
+        return helper.login(email, password);
     }
 }

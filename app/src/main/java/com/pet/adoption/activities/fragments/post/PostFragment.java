@@ -24,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,9 +38,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 public class PostFragment extends Fragment {
@@ -170,7 +166,6 @@ public class PostFragment extends Fragment {
     }
 
     private void uploadInfoToDB(){
-        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date(System.currentTimeMillis()));
         String name = et_name.getText().toString().trim();
         String age = sp_age.getSelectedItem().toString();
         String type = sp_type.getSelectedItem().toString();
@@ -182,16 +177,13 @@ public class PostFragment extends Fragment {
         String state = sp_state.getSelectedItem().toString();
         String description = et_desc.getText().toString().trim();
 
-        PetInfo info = new PetInfo(time, filename, name, age, type, size,
+        PetInfo info = new PetInfo(filename, name, age, type, size,
                 species, status, contact,
                 gender, state, description,
                 FirebaseAuth.getInstance().getUid());
 
-        FirebaseFirestore.getInstance()
-                .collection("pets")
-                .add(info)
+        info.post()
                 .addOnCompleteListener(task -> {
-                    uploadProgressBar.setVisibility(View.GONE);
                     if (!task.isSuccessful()){
                         Toast.makeText(getContext()
                                 , Objects.requireNonNull(task.getException()).getMessage()
@@ -215,7 +207,6 @@ public class PostFragment extends Fragment {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-
                 });
     }
 

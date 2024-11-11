@@ -5,17 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pet.adoption.R;
 import com.pet.adoption.entities.PetInfo;
-import com.pet.adoption.entities.PetInfoAdapter;
+import com.pet.adoption.activities.fragments.pet.PetInfoAdapter;
 
 import java.util.List;
 

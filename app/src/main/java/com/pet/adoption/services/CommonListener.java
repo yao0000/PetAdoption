@@ -159,12 +159,79 @@ public class CommonListener {
         return sp_size_selected_listener;
     }
 
+    public void valueChangeSPSize(){
+        if (sp_size.getSelectedItemPosition() == 0){
+            setSpinnerEntries(arr_empty);
+            return;
+        }
+
+        int index = sp_type.getSelectedItemPosition();
+        if (sp_size.getSelectedItemPosition() == 1){ // small
+            String[][] value = {
+                    arr_empty,
+                    getArrayString(R.array.array_species_breed_cat_small),
+                    getArrayString(R.array.array_species_breed_dog_small)
+            };
+            setSpinnerEntries(value[index]);
+        }
+        else if (sp_size.getSelectedItemPosition() == 2){ //medium
+            String[][] value = {
+                    arr_empty,
+                    getArrayString(R.array.array_species_breed_cat_medium),
+                    getArrayString(R.array.array_species_breed_dog_medium)
+            };
+            setSpinnerEntries(value[index]);
+        }
+        else if (sp_size.getSelectedItemPosition() == 3){ //large
+            String[][] value = {
+                    arr_empty,
+                    getArrayString(R.array.array_species_breed_cat_large),
+                    getArrayString(R.array.array_species_breed_dog_large)
+            };
+            setSpinnerEntries(value[index]);
+        }
+    }
+
+    public void valueChangeSPType(){
+        if (sp_type.getSelectedItemPosition() == 0){
+            setSpinnerEntries(arr_empty);
+            return;
+        }
+
+        int index = sp_size.getSelectedItemPosition();
+        if (sp_type.getSelectedItemPosition() == 1){ // Cat
+            String[][] value = {
+                    arr_empty,
+                    getArrayString(R.array.array_species_breed_cat_small),
+                    getArrayString(R.array.array_species_breed_cat_medium),
+                    getArrayString(R.array.array_species_breed_cat_large)
+            };
+
+            setSpinnerEntries(value[index]);
+        }
+        else if (sp_type.getSelectedItemPosition() == 2){ // dog
+
+            String[][] value = {
+                    arr_empty,
+                    getArrayString(R.array.array_species_breed_dog_small),
+                    getArrayString(R.array.array_species_breed_dog_medium),
+                    getArrayString(R.array.array_species_breed_dog_large)
+            };
+
+            setSpinnerEntries(value[index]);
+        }
+    }
+
     private String[] getArrayString(@ArrayRes int id){
         assert context != null;
         String[] values = context.getResources().getStringArray(id);
         if (cls == PetFragment.class)
             values[0] = "Species";
         return values;
+    }
+
+    public static String[] getArray(Context con, @ArrayRes int id){
+        return con.getResources().getStringArray(id);
     }
 
     private void setSpinnerEntries(String[] values){
