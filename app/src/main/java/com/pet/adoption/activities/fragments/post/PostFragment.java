@@ -31,7 +31,7 @@ import com.pet.adoption.R;
 import com.pet.adoption.activities.FragmentActivity;
 import com.pet.adoption.activities.fragments.pet.PetFragment;
 import com.pet.adoption.entities.PetInfo;
-import com.pet.adoption.services.CommonListener;
+import com.pet.adoption.services.common.Listener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,10 +42,12 @@ import java.util.Objects;
 
 public class PostFragment extends Fragment {
 
+    private View view;
+
     private static final int PICK_IMG = 101;
     private Uri imgUri;
     private String filename;
-    private CommonListener listener;
+    private Listener listener;
 
     private TextView tv_pic_selection;
     private EditText et_name, et_contact, et_desc;
@@ -55,28 +57,33 @@ public class PostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_post, container, false);
-        listener = new CommonListener(view, getClass());
-        onLoad(view);
+        view = inflater.inflate(R.layout.fragment_post, container, false);
+        listener = new Listener(view, getClass());
+        onLoad();
         return view;
     }
 
-    private void onLoad(View v){
-        et_name = v.findViewById(R.id.et_name);
-        sp_age = v.findViewById(R.id.spinner_age);
-        tv_pic_selection = v.findViewById(R.id.tv_upload);
-        sp_type = v.findViewById(R.id.spinner_type);
-        sp_size = v.findViewById(R.id.spinner_size);
-        sp_species = v.findViewById(R.id.spinner_species);
-        sp_status = v.findViewById(R.id.spinner_neuter_status);
-        et_contact = v.findViewById(R.id.et_contact_no);
-        sp_gender = v.findViewById(R.id.spinner_gender);
-        sp_state = v.findViewById(R.id.spinner_state);
-        et_desc = v.findViewById(R.id.et_description);
-        uploadProgressBar = v.findViewById(R.id.uploadProgressBar);
+    private void onLoad(){
+        et_name = view.findViewById(R.id.et_name);
+        sp_age = view.findViewById(R.id.spinner_age);
+        tv_pic_selection = view.findViewById(R.id.tv_upload);
+        sp_type = view.findViewById(R.id.spinner_type);
+        sp_size = view.findViewById(R.id.spinner_size);
+        sp_species = view.findViewById(R.id.spinner_species);
+        sp_status = view.findViewById(R.id.spinner_neuter_status);
+        et_contact = view.findViewById(R.id.et_contact_no);
+        sp_gender = view.findViewById(R.id.spinner_gender);
+        sp_state = view.findViewById(R.id.spinner_state);
+        et_desc = view.findViewById(R.id.et_description);
+        uploadProgressBar = view.findViewById(R.id.uploadProgressBar);
+
+        setEventHandler();
+    }
+
+    private void setEventHandler(){
         // To set event handler
         tv_pic_selection.setOnClickListener(e -> tvPicSelection_Click());
-        v.findViewById(R.id.btn_submit).setOnClickListener(e -> btnSubmit_Click());
+        view.findViewById(R.id.btn_submit).setOnClickListener(e -> btnSubmit_Click());
 
         // To set value change listener
         sp_type.setOnItemSelectedListener(listener.getSp_type_selected_listener());
@@ -271,4 +278,5 @@ public class PostFragment extends Fragment {
             tv_pic_selection.setText(getFileName(imgUri));
         }
     }
+
 }

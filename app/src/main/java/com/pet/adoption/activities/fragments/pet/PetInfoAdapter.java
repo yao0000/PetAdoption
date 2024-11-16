@@ -3,24 +3,17 @@ package com.pet.adoption.activities.fragments.pet;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.PetInfo;
-import com.pet.adoption.entities.PetInfoViewHolder;
+import com.pet.adoption.services.common.Function;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
@@ -45,10 +38,6 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
     public void onBindViewHolder(@NonNull PetInfoViewHolder holder, int position) {
         PetInfo info = list.get(position);
         holder.getLl_item_pet().setOnClickListener(e -> {
-            if (!holder.isImageLoad()){
-                Toast.makeText(context, "Item is loading, please wait", Toast.LENGTH_LONG).show();
-                return;
-            }
             Intent intent = new Intent(context, PetDetailsActivity.class);
             intent.putExtra("data", info);
             context.startActivity(intent);
@@ -60,33 +49,7 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
         holder.getTvTag3().setText("#" + info.getGender());
         holder.getTvTag4().setText("#" + info.getSize());
 
-
-        StorageReference ref = FirebaseStorage.getInstance().getReference("images").child(info.getFileName());
-        File file = null;
-        try {
-            file = File.createTempFile(info.getFileName(), "");
-            File finalFile = file;
-            ref.getFile(file)
-                    .addOnCompleteListener(taskSnapshot -> {
-                        Bitmap bitmap = BitmapFactory.decodeFile(finalFile.getAbsolutePath());
-                        holder.getImageView().setImageBitmap(bitmap);
-                        holder.setImageLoad(true);
-                    })
-                    .addOnFailureListener(task -> {
-                        Toast.makeText(context
-                                , task.getMessage()
-                                , Toast.LENGTH_SHORT).show();
-                    });
-        } catch (IOException e) {
-            Toast.makeText(context
-                    , e.getMessage()
-                    , Toast.LENGTH_SHORT).show();
-        }
-        finally {
-            if (file != null && file.exists()){
-                Boolean deleted = file.delete();
-            }
-        }
+        Function.setImageView(context, holder.getImageView(),info.getFileName());
     }
 
     @Override

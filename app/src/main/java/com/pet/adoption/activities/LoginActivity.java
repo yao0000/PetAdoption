@@ -8,13 +8,14 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.pet.adoption.entities.Account;
 import com.pet.adoption.R;
+import com.pet.adoption.services.firebase.FirebaseAuthHelper;
 
 public class LoginActivity extends AppCompatActivity{
+
     private EditText etEmail, etPassword;
-    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +27,13 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if (mAuth.getCurrentUser() != null)
+        if (FirebaseAuthHelper.isLoggedIn())
             startActivity(new Intent(LoginActivity.this, FragmentActivity.class));
     }
 
     private void onLoad(){
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        mAuth = FirebaseAuth.getInstance();
 
         setEventListener();
     }
@@ -65,4 +65,5 @@ public class LoginActivity extends AppCompatActivity{
     public void tvRegister_Click(){
         startActivity(new Intent(this, RegisterActivity.class));
     }
+
 }

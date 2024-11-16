@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="@drawable/gradient_background"
+    tools:context=".activities.fragments.home.GuideFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_home"
+            android:textSize="16sp"
+            android:paddingStart="8dp"
+            android:textColor="@android:color/black"
+            app:drawableStartCompat="@drawable/baseline_arrow_back"
+            tools:ignore="RtlSymmetry" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="30dp"
+                android:paddingEnd="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/guide_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/beginner_intro"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="#555555"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp" />
+
+                <!-- Section Title -->
+                <TextView
+                    android:id="@+id/section_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/cat_basic_title"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:paddingBottom="16dp" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="250dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_pet_image"
+                        android:layout_width="300dp"
+                        android:layout_height="250dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/dog"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.	Basic supplies preparation\n
+\nFor beginners, preparing the necessary items is the first step in welcoming a dog home. Here are some essential supplies you should have ready before bringing a dog home:\n"
+
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:rowCount="9"
+                    android:columnCount="2"
+                    tools:ignore="RtlSymmetry">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="●"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dog food and feeding supplies: "
+                        android:fontFamily="@font/lato"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="15dp"
+                        android:justificationMode="inter_word"
+                        android:text="It’s recommended to buy high-quality dog food and prepare food and water bowls. High-quality dog food provides balanced nutrition and ensures your dog's health. For example, the stainless steel bowls as they are easy to clean and less likely to harbour bacteria."
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="●"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Dog bed and crate: "
+                        android:fontFamily="@font/lato"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:text="A dog bed offers a safe and comfortable place for your dog to rest, while a crate is a necessary tool for training. When a dog first comes home, it might be anxious and run around, and a crate can prevent them from eating harmful objects or getting into other dangers."
+                        android:paddingEnd="15dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="●"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Pee pads and dog toilets: "
+                        android:fontFamily="@font/lato"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:text="There are various dog toilets and pee pads available on the market. Choose models that are easy to clean and fit your dog’s size, which will help with potty training."
+                        android:paddingEnd="15dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="●"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Leash and harness:  "
+                        android:fontFamily="@font/lato"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:text="A leash is an essential tool for walking your dog. For active and strong dogs, a harness is gentler and provides better control compared to a collar, effectively preventing neck injuries."
+                        android:paddingEnd="15dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="●"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:justificationMode="inter_word"
+                        android:text="Additionally, you should prepare some common cleaning supplies, such as wet wipes, pet shampoo, brushes, and nail clippers. These items play a key role in your dog’s daily care and health management."
+                        android:paddingEnd="15dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+                </GridLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="2.	Health management for dogs\n\n
+When a dog first arrives at its new home, it usually needs a series of health checks and vaccinations to ensure a healthy life.
+"
+
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="•	Vaccinations and deworming: "
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Dogs need to be vaccinated on time to prevent diseases like distemper and parvovirus. Internal deworming should be done every three months, and external deworming once a month, using well-known products. Before getting a dog, ensure the home environment is clean and, if necessary, conduct a thorough disinfection."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="250dp"
+                    android:layout_marginVertical="20dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="300dp"
+                        android:layout_height="250dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/img_dog"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="•	Health checkups: "
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Newly adopted dogs typically require a comprehensive health check. It’s recommended to take the dog to a local pet hospital for a professional examination, including checking temperature, teeth, and ears, to get a full understanding of its health status. If possible, consider virus testing to ensure the dog is not infected with serious diseases like distemper or parvovirus."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="250dp"
+                    android:layout_marginVertical="20dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="300dp"
+                        android:layout_height="250dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/img_dog_1"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="•	Nutrition and supplements: "
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Puppies have relatively delicate digestive systems, so it’s recommended to use high-quality dog food and supplement with probiotics, calcium, fish oil, and other health products as needed. Dogs at different stages require different nutritional supplies, and providing necessary trace elements and vitamins regularly can promote healthy growth and boost their immunity."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+android:text="\n3.	Diet and feeding\n
+Scientific management of a dog’s diet is essential. Proper dietary planning not only promotes healthy growth but also helps prevent diseases.
+"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="•	Food selection: "
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Choosing high-quality dog food is fundamental to maintaining a dog’s health. There are various options available, including natural food, commercial food, and grain-free food. Select the appropriate food based on your dog's breed and age. Prefer natural or grain-free food with high meat content, ensuring that your dog gets sufficient protein and other essential nutrients."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="•	Feeding frequency: "
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="For puppies, it’s recommended to feed small amounts more frequently, about three to four times a day, gradually reducing to once or twice a day. Adult dogs can be fed once or twice daily, and it’s important to monitor their eating habits to avoid digestive issues from overeating."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="•	Special foods:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Some foods are beneficial for dogs, such as low-fat, unsalted chew treats and freeze-dried snacks. However, certain foods can be toxic to dogs, such as chocolate, onions, and grapes, and should never be fed to them. Make sure your dog has adequate water, especially during hot weather and after vigorous exercise."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="\n4.	Training and behaviour management\n
+Training and behaviour management are crucial topics for new dog owners. Here are some essential training areas:
+"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Potty training:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Potty training is fundamental when raising a dog. First, designate a fixed toilet area for your dog. Take them to the designated spot after every meal, and reward them promptly when they succeed, reinforcing the training."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="• Basic obedience training:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="This includes commands like “sit,” “wait,” and “come.” Such training not only enhances obedience but also strengthens the bond between owner and dog. If possible, consider enrolling your dog in professional training classes to address behavioural issues systematically."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="• Correcting bad behaviour:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="In a new environment, dogs may exhibit undesirable behaviours, such as chewing furniture or barking excessively. Be patient and guide them, providing appropriate discipline (like a brief timeout or crating) and reinforcing positive behaviour through rewards."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="• Socialization:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Dogs need social activities. Whenever safe and healthy, allow them to interact with other dogs to promote social development. The socialization period for dogs is typically between 2 to 4 months of age, making this the most critical time for social training."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="5. Living environment and daily care\n\nA healthy and pleasant living environment is key to ensuring a happy life for your dog. Providing the right space, routine, and care ensures a well-adjusted, content dog."
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="15dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Living environment:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Keep your home clean and tidy, and regularly ventilate and disinfect it to prevent fleas, ticks, and other parasites. Provide some dog toys and chewable to keep your dog occupied and reduce the chance of them chewing on furniture."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="• Routine care:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="This includes bathing, brushing, nail trimming, and cleaning teeth and ears. Long-haired dogs need regular grooming to prevent matting, while short-haired dogs require skin cleaning to prevent skin conditions. Bathing should be done in moderation, as excessive bathing can strip the skin’s natural protective oils; typically, once or twice a month is sufficient. In hot weather, ensure there are ways for your dog to stay cool, with plenty of water and cooling equipment."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="6. Mental preparation and awareness of responsibility\n\nRaising a dog isn’t just about providing physical needs; you must also be mentally and emotionally responsible for your dog."
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="15dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Mental preparation:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Raising a dog requires long-term commitment and dedication. Owners must fully commit to caring for and loving their dog. Dogs won’t always be the playful puppies they start out as; they will grow into adults who need exercise, training, and medical care. Be prepared to face various challenges as your dog grows."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="• Sense of responsibility:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Owning a dog is a long-term responsibility that involves caring for and being with them for 20 years or more. Owners must not only provide good living conditions and health care but also give extra love during their senior years. Don’t give up on your dog due to unexpected situations or initial difficulties; abandonment causes severe psychological harm to the dog and contributes to the issue of stray dogs."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="• Legal responsibility:"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="Dog ownership comes with legal responsibilities, such as obtaining a dog license, vaccinating, and practicing responsible pet ownership. Always keep your dog on a leash when walking them outside and carry tools to clean up after them. Being a responsible pet owner reflects well on yourself and ensures the safety of others."
+                    android:paddingEnd="15dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

@@ -1,7 +1,5 @@
 package com.pet.adoption.activities.fragments.home;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,14 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.pet.adoption.activities.FragmentActivity;
 import com.pet.adoption.R;
 
 public class GuideFragment extends Fragment {
 
+    private View view;
     public enum Type {Dog, Cat}
     private final Type selectedType;
 
@@ -27,18 +24,21 @@ public class GuideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_guide, container, false);
+        int id = R.layout.fragment_guide_cat;
         if (selectedType == Type.Dog){
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
-            ((ImageView)view.findViewById(R.id.iv_pet_image)).setImageBitmap(bitmap);
-            ((TextView)view.findViewById(R.id.tv_guide_desc)).setText(getString(R.string.dog_intro));
+            id = R.layout.fragment_guide_dog;
         }
-        onLoad(view);
+        view = inflater.inflate(id, container, false);
+        onLoad();
         return view;
     }
 
-    private void onLoad(View v){
-        v.findViewById(R.id.btnBack).setOnClickListener(e ->
+    private void onLoad(){
+        setEventHandler();
+    }
+
+    private void setEventHandler(){
+        view.findViewById(R.id.btnBack).setOnClickListener(e ->
                 FragmentActivity.getInstance().commitFragment(new HomeFragment()));
     }
 

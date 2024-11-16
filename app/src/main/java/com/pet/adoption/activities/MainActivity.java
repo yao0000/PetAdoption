@@ -12,4 +12,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         startActivity(new Intent(this, LoginActivity.class));
     }
+
 }

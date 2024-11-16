@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
-import com.pet.adoption.services.FirestoreHelper;
+import com.pet.adoption.services.firebase.FirestoreHelper;
 
 import java.util.Objects;
 
@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         Account account = new Account(email, password, username);
         account.signUp()
                 .addOnCompleteListener(task -> {
+
                     if (!task.isSuccessful()){
                         Toast.makeText(RegisterActivity.this
                                         , task.getException().getMessage()
@@ -66,8 +67,8 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
                     account.setUserUID(FirebaseAuth.getInstance().getUid());
-                    FirestoreHelper helper = new FirestoreHelper();
-                    helper.upload("users", FirebaseAuth.getInstance().getUid(), account)
+
+                    FirestoreHelper.upload("users", FirebaseAuth.getInstance().getUid(), account)
                             .addOnCompleteListener(this, helperTask -> {
                                 if (!helperTask.isSuccessful()){
                                     Toast.makeText(RegisterActivity.this
@@ -84,4 +85,5 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                 });
     }
+
 }

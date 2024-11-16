@@ -3,7 +3,7 @@ package com.pet.adoption.entities;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.pet.adoption.services.FirebaseAuthHelper;
+import com.pet.adoption.services.firebase.FirebaseAuthHelper;
 
 public class Account {
 
@@ -51,12 +51,10 @@ public class Account {
     }
 
     public Task<AuthResult> signUp(){
-        FirebaseAuthHelper helper = new FirebaseAuthHelper();
-        return helper.signUp(email, password);
+        return FirebaseAuthHelper.signUp(email, password);
     }
 
     public Task<AuthResult> login(){
-        FirebaseAuthHelper helper = new FirebaseAuthHelper();
-        return helper.login(email, password);
+        return FirebaseAuthHelper.login(email, password);
     }
 }

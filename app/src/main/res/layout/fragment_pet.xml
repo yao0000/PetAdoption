@@ -73,7 +73,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <Spinner
-                    android:id="@+id/spinner_species"
+                    android:id="@+id/spinner_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -110,6 +110,15 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinner_species"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:textAlignment="center"
+                android:background="@drawable/edittext_border"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ScrollView
                 android:id="@+id/wholeTransaction"

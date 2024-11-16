@@ -65,15 +65,4 @@ public class FragmentActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void addFragment(@NonNull Fragment fragment){
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
-
-    public void popFragment(){
-        getSupportFragmentManager().popBackStack();
-    }
-
 }

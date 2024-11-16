@@ -1,12 +1,7 @@
 package com.pet.adoption.activities.fragments.pet;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,26 +11,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
 import com.pet.adoption.entities.PetInfo;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.pet.adoption.services.common.ClipboardHelper;
+import com.pet.adoption.services.common.Function;
+import com.pet.adoption.services.firebase.FirestoreHelper;
 
 public class PetDetailsActivity extends AppCompatActivity {
 
@@ -60,36 +41,9 @@ public class PetDetailsActivity extends AppCompatActivity {
     private void onLoad(){
         ll_save = findViewById(R.id.ll_saved);
         tv_save = findViewById(R.id.tv_save);
-        loadSaveStatus();
+
         setEventHandler();
         setDefaultValue();
-        ImageView iv = findViewById(R.id.iv_pet_image);
-        StorageReference ref = FirebaseStorage.getInstance().getReference("images").child(info.getFileName());
-        File file = null;
-        try {
-            file = File.createTempFile(info.getFileName(), "");
-            File finalFile = file;
-            ref.getFile(file)
-                    .addOnCompleteListener(taskSnapshot -> {
-                        Bitmap bitmap = BitmapFactory.decodeFile(finalFile.getAbsolutePath());
-                        iv.setImageBitmap(bitmap);
-
-                    })
-                    .addOnFailureListener(task -> {
-                        Toast.makeText(PetDetailsActivity.this
-                                , task.getMessage()
-                                , Toast.LENGTH_SHORT).show();
-                    });
-        } catch (IOException e) {
-            Toast.makeText(PetDetailsActivity.this
-                    , e.getMessage()
-                    , Toast.LENGTH_SHORT).show();
-        }
-        finally {
-            if (file != null && file.exists()){
-                Boolean deleted = file.delete();
-            }
-        }
     }
 
     private void setDefaultValue(){
@@ -102,110 +56,99 @@ public class PetDetailsActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.tv_info)).setText(info.getDescription());
         ((TextView)findViewById(R.id.tv_location)).setText(info.getState());
 
-        FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(info.getPublisherUID())
-                .get()
+        Function.setImageView(this,findViewById(R.id.iv_pet_image), info.getFileName());
+
+        FirestoreHelper.loadAccount("users", info.getPublisherUID())
                 .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()){
-                        Toast.makeText(PetDetailsActivity.this
-                                , Objects.requireNonNull(task.getException()).getMessage()
-                                , Toast.LENGTH_SHORT).show();
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(PetDetailsActivity.this,
+                                task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
                         return;
                     }
-
-                    DocumentSnapshot doc = task.getResult();
-                    if (!doc.exists()){
-                        Toast.makeText(PetDetailsActivity.this
-                                , "User name not found"
-                                , Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    Account acc = doc.toObject(Account.class);
-                    assert acc != null;
-                    ((TextView)findViewById(R.id.tv_username)).setText(acc.getUsername());
+                    Account acc = task.getResult();
+                    ((TextView) findViewById(R.id.tv_username)).setText(acc.getUsername());
                 });
+
+        loadSaveStatus();
     }
 
     private void setEventHandler(){
         findViewById(R.id.tv_back).setOnClickListener(e -> finish());
         findViewById(R.id.ll_saved).setOnClickListener(e -> onClickBtnSave());
         findViewById(R.id.ll_whatsapp).setOnClickListener(e -> onClickBtnWhatsApp());
+        findViewById(R.id.ll_application).setOnClickListener(e -> onClickBtnApplication());
     }
 
     private void onClickBtnSave(){
-        DocumentReference ref = FirebaseFirestore.getInstance()
-                .collection("save")
-                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
-
-        ref.get()
-                .addOnSuccessListener(snapshot -> {
-                    if (!snapshot.exists()) {
-                        List<String> list = new ArrayList<>();
-                        list.add(info.getPetInfoUID());
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("list", list);
-                        ref.set(map)
-                                .addOnSuccessListener(aVoid -> {
-                                    updateSaveButtonLayout(R.color.green);
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(PetDetailsActivity.this,
-                                            e.getMessage(),
-                                            Toast.LENGTH_LONG)
-                                            .show();
-                                });
+        String mode = tv_save.getText().toString();
+        info.favourite(mode)
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()){
+                        Toast.makeText(PetDetailsActivity.this,
+                                task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
                         return;
                     }
-
-                    List<String> uidList = (List<String>) snapshot.get("list");
-                    if (uidList == null)
-                        uidList = Collections.emptyList();
-
-                    if (tv_save.getText().toString().equals("Save")){ // add to firebase
-                        if (!uidList.contains(info.getPetInfoUID())){
-                            ref.update("list", FieldValue.arrayUnion(info.getPetInfoUID()))
-                                    .addOnSuccessListener(aVoid -> {
-                                        updateSaveButtonLayout(R.color.green);
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(PetDetailsActivity.this,
-                                                        e.getMessage(),
-                                                        Toast.LENGTH_LONG)
-                                                .show();
-                                    });
-                        }
+                    if (mode.equals("Save")){
+                        updateSaveButtonLayout(R.color.green);
                     }
-                    else{ // remove from firebase
-                        ref.update("list", FieldValue.arrayRemove(info.getPetInfoUID()))
-                                .addOnSuccessListener(aVoid -> {
-                                    updateSaveButtonLayout(R.color.yellow);
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(PetDetailsActivity.this,
-                                            e.getMessage(),
-                                            Toast.LENGTH_LONG)
-                                            .show();
-                                });
+                    else{
+                        updateSaveButtonLayout(R.color.yellow);
                     }
                 });
     }
 
+    private void onClickBtnWhatsApp(){
+        info.contactShelter(this);
+    }
+
+    private void onClickBtnApplication(){
+        String form = "Basic Information\n" +
+                "1. Name:\n" +
+                "2. Age:\n" +
+                "3. Phone Number:\n" +
+                "4. Home Address:\n\n" +
+
+                "Household Information\n" +
+                "1. Do all family members agree to adopt pet?\n" +
+                "2. Do you have other pets? If yes, specify type and quantity of pets.\n" +
+                "3. Have you ever owned a pet before? If yes, describe your experience.\n\n" +
+
+                "Living Situation\n" +
+                "1. Type of Residence:\n" +
+                "2. Is pet ownership allowed in your residence?\n\n" +
+
+                "Financial and Employment Information\n" +
+                "1. Employment Type:\n" +
+                "2. Are you financially able to support a pet?\n" +
+                "3. Monthly Budget for Pet Expenses:\n\n" +
+
+                "Adoption Intentions\n" +
+                "1. Name of Pet You Wish to Adopt:\n" +
+                "2. Why do you want to adopt this pet?:\n\n" +
+
+                "Pet Care Arrangements\n" +
+                "1. Time Available Daily for Pet Care:\n" +
+                "2. Arrangements for Pet When You're Away:\n\n" +
+
+                "Commitment Agreement\n" +
+                "1. Do you commit to long-term care for your pet, and will not abandon it due to unexpected reasons?\n" +
+                "2. Are you willing to allow a post-adoption home visit?\n";
+        ClipboardHelper.copyTextToClipboard(getBaseContext(), form);
+    }
+
     private void loadSaveStatus(){
-        FirebaseFirestore.getInstance()
-                .collection("save")
-                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    if (!snapshot.exists())
+        info.isSaved()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(PetDetailsActivity.this,
+                                task.getException().getMessage(),  // Error message
+                                Toast.LENGTH_LONG).show();
                         return;
+                    }
 
-                    List<String> saveList = (List<String>) snapshot.get("list");
-                    if (saveList == null)
-                        return;
-
-                    if (saveList.contains(info.getPetInfoUID())){
+                    if (task.getResult()){
                         updateSaveButtonLayout(R.color.green);
                     }
                 });
@@ -218,24 +161,6 @@ public class PetDetailsActivity extends AppCompatActivity {
         }
         else
             tv_save.setText("Saved");
-    }
-
-    private void onClickBtnWhatsApp(){
-        try{
-            Uri uri = Uri.parse("http://wa.me" + info.getContact());
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.setPackage("com.whatsapp");
-
-            if (intent.resolveActivity(getPackageManager()) != null){
-                startActivity(intent);
-            }
-            else{
-                Toast.makeText(this, "WhatsApp is not installed on your device", Toast.LENGTH_SHORT).show();
-            }
-        }
-        catch(Exception e){
-            Toast.makeText(this, "Error opening WhatsApp chat", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }

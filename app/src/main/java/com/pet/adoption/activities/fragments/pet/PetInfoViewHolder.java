@@ -1,4 +1,4 @@
-package com.pet.adoption.entities;
+package com.pet.adoption.activities.fragments.pet;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pet.adoption.R;
 
 public class PetInfoViewHolder  extends RecyclerView.ViewHolder {
+
     private ImageView imageView;
     private TextView tvTime, tvDescription, tvTag1, tvTag2, tvTag3, tvTag4;
     private LinearLayout ll_item_pet;
-    private boolean isImageLoad = false;
 
     public PetInfoViewHolder(View item){
         super(item);
@@ -59,11 +59,4 @@ public class PetInfoViewHolder  extends RecyclerView.ViewHolder {
         return ll_item_pet;
     }
 
-    public boolean isImageLoad() {
-        return isImageLoad;
-    }
-
-    public void setImageLoad(boolean imageLoad) {
-        isImageLoad = imageLoad;
-    }
 }

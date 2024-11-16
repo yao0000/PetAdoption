@@ -13,19 +13,24 @@ import com.pet.adoption.R;
 
 public class HomeFragment extends Fragment {
 
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
-        onLoad(v);
-        return v;
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        onLoad();
+        return view;
     }
 
-    private void onLoad(View v){
-        v.findViewById(R.id.ll_cat).setOnClickListener(e ->
+    private void onLoad(){
+        setEventHandler();
+    }
+
+    private void setEventHandler(){
+        view.findViewById(R.id.ll_cat).setOnClickListener(e ->
                 setFragment(new GuideFragment(GuideFragment.Type.Cat)));
-        v.findViewById(R.id.ll_dog).setOnClickListener(e ->
+        view.findViewById(R.id.ll_dog).setOnClickListener(e ->
                 setFragment(new GuideFragment(GuideFragment.Type.Dog)));
     }
 

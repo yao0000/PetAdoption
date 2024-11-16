@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="@drawable/gradient_background"
+    tools:context=".activities.fragments.home.GuideFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_home"
+            android:textSize="16sp"
+            android:paddingStart="8dp"
+            android:textColor="@android:color/black"
+            app:drawableStartCompat="@drawable/baseline_arrow_back"
+            tools:ignore="RtlSymmetry" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/guide_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/beginner_intro"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="#555555"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp" />
+
+                <!-- Section Title -->
+                <TextView
+                    android:id="@+id/section_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/cat_basic_title"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:paddingBottom="16dp" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_pet_image"
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/cat"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_intro"
+                    android:paddingStart="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Explanation of Stress Response: "
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cats are naturally somewhat alert and cautious, which can make them easily startled. When they experience sudden and intense stimuli, they may become overly frightened. For example, imagine a sudden clap of thunder on a hot summer day that startles you—cats can have a similar reaction.
+This behaviour in cats is known as a stress response. My own cat once jumped and fluffed up its fur after being startled by thunder. More severe reactions can lead to a series of physical discomforts, and in such cases, it is important to take the cat to a vet for a check-up. In some cases, severe stress responses in cats can even lead to conditions like cystitis, which should be taken seriously.
+"
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scenarios Where Mild Stress Responses May Occur:"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scenario 1:"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="When a stranger suddenly visits the house, timid cats are more likely to show such reactions."
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scenario 2:"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="When taking the cat outside for a trip or a vet visit, it's best to minimize unnecessary outings."
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scenario 3:"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="When bathing the cat, consider using dry shampoo as an alternative to a full bath.\n\nWhen a cat shows signs of a stress response, it is important to help it calm down quickly. You can do this by holding the cat gently, pressing down on part of its body, and softly speaking to and petting the cat. This can help provide a sense of security."
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.	How to smoothly bring a cat home/take a cat outside?"
+                    android:paddingStart="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="As mentioned earlier, cats are sensitive animals that prefer staying in familiar environments. Taking a cat outside can make it anxious, and in severe cases, lead to a stress response. Therefore, before picking up a cat, it is essential to prepare a suitable cat carrier or airline crate. Ideally, it should be a small, semi-enclosed environment rather than completely transparent, as this can help reduce the stimulation from unfamiliar surroundings."
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avoid buying fully transparent cat carriers!"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_marginVertical="10dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/img_cat"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Main disadvantages of transparent carriers:"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transparent carriers often have limited space and poor air circulation. The fully transparent shell mostly caters to our psychological needs without considering how the cat feels inside.
+\nFor cats, this design has no real benefit and can lead to unnecessary attention from strangers, causing the cat to become more anxious due to unwanted teasing.
+"
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Compared to transparent carriers, airline crates offer more practicality and privacy, along with a larger usable space."
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_marginVertical="10dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/img_cat_1"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Advantages of airline crates over cat carriers:"
+                    android:paddingStart="30dp"
+                    android:fontFamily="@font/lato"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="30dp"
+                    android:columnCount="2"
+                    android:rowCount="3"
+                    tools:ignore="RtlSymmetry">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="a)"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:justificationMode="inter_word"
+                        android:text="Sturdy and durable with more space, allowing the cat to turn around and providing a more private environment."
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="30dp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="b)"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:justificationMode="inter_word"
+                        android:text="Compliant with airline shipping standards, making them suitable for pet transportation."
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="30dp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="c)"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:justificationMode="inter_word"
+                        android:text="Choosing an appropriately sized airline crate ensures a much longer service life than cat carriers, making it more practical and reliable."
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="30dp"
+                        android:textColor="@android:color/black"
+                        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+                </GridLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3.	How to teach a cat to use a litter box and litter?"
+                    android:paddingStart="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cats originated from desert regions and have an instinct to bury their waste in sand. Therefore, it's necessary to provide a litter box for them, as cats will instinctively use it to go to the bathroom. You should also purchase cat litter for burying their waste. When choosing a litter box, it’s recommended to buy a fully enclosed or top-entry litter box."
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_marginVertical="10dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/img_cat_2"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Advantages of an enclosed litter box include having a shell that can contain the odour inside the box. However, a downside is that cats may carry litter out of the box, making it slightly more difficult to clean.\n
+\nTop-entry litter boxes can effectively reduce the scattering of litter, and either type can be freely chosen according to preference.\n
+\nGenerally, by the time a kitten is three months old, it will have learned how to use the litter box correctly from its mother, including how to properly cover its waste with litter.\n
+\nIf you bring home a kitten that is younger than three months, you will need to pour about 3 cm of litter into the litter box, then place the kitten inside and gently use its paws to scratch at the litter. This gesture tells the kitten that this is where it should go to the bathroom, and from then on, it will use the litter box.\n
+\nIn some cases, young kittens might not yet understand how to use the litter box and may urinate anywhere. This can be troublesome, but there’s a solution: use a tissue to absorb the cat urine and place the tissue in the designated litter box. Then, place the kitten in the litter box and let it smell the scent on the tissue. This helps teach the kitten how to use the litter box, and although the process might be a bit tedious, it’s quite effective!\n
+\nPS: The litter box needs to be cleaned and disinfected regularly to prevent waste buildup, which can affect the cat's mood.\n"
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.	What should a cat eat daily?"
+                    android:paddingStart="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Feeding your cat with quality cat food is generally sufficient, as a good cat food will contain the necessary nutrients to meet your cat's dietary needs.\n"
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:id="@+id/tv_special"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Key elements to look for in cat food include crude protein, crude fat, crude fibre, and taurine."
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\nIf possible, try to encourage your cat to drink more water. Getting cats into the habit of drinking water from a young age is important because long-term low water intake can lead to urinary tract issues. For example, I didn't pay much attention to my cat's water intake, and last August, it developed bladder stones, which required expensive surgery.
+\n\nA good approach now is to improve the diet by offering more wet food. Compared to dry cat food, wet food contains more water, which cats are often more willing to consume than just drinking water.
+\n"
+                    android:paddingHorizontal="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:id="@+id/tv_special_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="30dp"
+                    android:text="Currently, I feed my cat complete wet food as its main meal. Wet food is not only nutritionally balanced and high in meat content, but it also has a high-water content, making it particularly suitable for cats that don’t drink much water. It can be used both as a primary food or as a treat."
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5.	How to trim a cat’s nails?"
+                    android:paddingStart="30dp"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginVertical="10dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/edittext_border"
+                        android:src="@drawable/img_cat_3"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cat_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="30dp"
+                    android:text="In addition, getting your cat used to having its nails trimmed from a young age can help prevent scratches during play. It’s important to note that you should not use regular human nail clippers for cats. As shown in the image above, when trimming, be sure to avoid cutting into the blood vessel; only trim the part of the nail in front of the red area.\n
+\nThe price of cat nail clippers is generally like what's shown below; there’s no need to buy overly expensive ones.\n
+\nAfter each nail-trimming session, you can give your cat a small treat, such as freeze-dried snacks or canned cat food. Using treats as rewards helps make the cat more comfortable with nail trimming and can also strengthen the bond between you and your cat.\n
+\nIf possible, consider purchasing chicken breast. Cut the meat into strips and boil it in water. Once it’s cooked, let it cool down before feeding it to your cat. This method is not only safe and healthy but can also save you money on snacks.\n"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"
+                    tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute" />
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+</FrameLayout>

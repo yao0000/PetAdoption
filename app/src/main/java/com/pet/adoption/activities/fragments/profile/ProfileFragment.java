@@ -13,60 +13,53 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.pet.adoption.activities.MainActivity;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
-import com.pet.adoption.services.FirebaseAuthHelper;
+import com.pet.adoption.services.firebase.FirebaseAuthHelper;
+import com.pet.adoption.services.firebase.FirestoreHelper;
 
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
+    private View view;
+    private TextView tv_username;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        onLoad(view);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        onLoad();
         return view;
     }
 
     @SuppressLint("SetTextI18n")
-    private void onLoad(View v){
+    private void onLoad(){
+        tv_username = view.findViewById(R.id.tv_username);
 
-        TextView tv_username = v.findViewById(R.id.tv_username);
+        loadUsername();
+        setEventHandler();
+    }
 
-        FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .get()
+    private void setEventHandler(){
+        view.findViewById(R.id.ll_log_out).setOnClickListener(e -> onClickLogOut());
+        view.findViewById(R.id.ll_saved).setOnClickListener(e -> onClickBtnSaved());
+    }
+
+    private void loadUsername(){
+        FirestoreHelper.loadAccount("users", FirebaseAuth.getInstance().getUid())
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()){
                         Toast.makeText(getContext()
-                                        , Objects.requireNonNull(task.getException()).getMessage()
-                                        , Toast.LENGTH_SHORT).show();
+                                , Objects.requireNonNull(task.getException()).getMessage()
+                                , Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    DocumentSnapshot doc = task.getResult();
-                    if (!doc.exists()){
-                        Toast.makeText(getContext()
-                                        , "User name not found"
-                                        , Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    Account acc = doc.toObject(Account.class);
-                    assert acc != null;
+                    Account acc = task.getResult();
                     tv_username.setText("Hi, " + acc.getUsername());
                 });
-
-        setEventHandler(v);
-    }
-
-    private void setEventHandler(View v){
-        v.findViewById(R.id.ll_log_out).setOnClickListener(e -> onClickLogOut());
-        v.findViewById(R.id.ll_saved).setOnClickListener(e -> onClickBtnSaved());
     }
 
     private void onClickBtnSaved(){
@@ -74,9 +67,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onClickLogOut(){
-        new FirebaseAuthHelper().signOut();
+        FirebaseAuthHelper.signOut();
         Intent intent = new Intent(getActivity(), MainActivity.class);  // Replace with your main activity
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
 }

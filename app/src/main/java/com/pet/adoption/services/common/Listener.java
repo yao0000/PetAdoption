@@ -1,4 +1,4 @@
-package com.pet.adoption.services;
+package com.pet.adoption.services.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,7 +15,7 @@ import com.pet.adoption.R;
 import com.pet.adoption.activities.fragments.pet.PetFragment;
 import com.pet.adoption.activities.fragments.post.PostFragment;
 
-public class CommonListener {
+public class Listener {
 
     private final Context context;
     private final Spinner sp_type;
@@ -24,7 +24,7 @@ public class CommonListener {
     private final String[] arr_empty;
     private Class<?> cls;
 
-    public CommonListener(View view, Class<?> cls) {
+    public Listener(View view, Class<?> cls) {
         this.cls = cls;
         context = view.getContext();
 
@@ -239,4 +239,5 @@ public class CommonListener {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_species.setAdapter(adapter);
     }
+
 }

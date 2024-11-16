@@ -1,10 +1,17 @@
 package com.pet.adoption.entities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.Task;
-import com.pet.adoption.services.FirestoreHelper;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.pet.adoption.services.firebase.FirestoreHelper;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class PetInfo implements Serializable {
 
@@ -163,8 +170,51 @@ public class PetInfo implements Serializable {
         this.publisherUID = publisherUID;
     }
 
+    public void contactShelter(Context context){
+        try{
+            Uri uri = Uri.parse("http://wa.me" + this.contact);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage("com.whatsapp");
+
+            if (intent.resolveActivity(context.getPackageManager()) != null){
+                context.startActivity(intent);
+            }
+            else{
+                Toast.makeText(context, "WhatsApp is not installed on your device", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch(Exception e){
+            Toast.makeText(context, "Error opening WhatsApp chat", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public Task<Void> post(){
-        FirestoreHelper helper = new FirestoreHelper();
-        return helper.upload("pets", petInfoUID, this);
+        return FirestoreHelper.upload("pets", petInfoUID, this);
+    }
+
+    public Task<Void> favourite(String mode){
+        return FirestoreHelper.favorite(petInfoUID, mode);
+    }
+
+    public Task<Boolean> isSaved() {
+        TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
+
+        FirestoreHelper.loadSavedList()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        taskCompletionSource.setException(task.getException());
+                        return;
+                    }
+
+                    List<String> list = task.getResult();
+                    if (list == null) {
+                        taskCompletionSource.setResult(false);
+                        return;
+                    }
+
+                    taskCompletionSource.setResult(list.contains(PetInfo.this.getPetInfoUID()));
+                });
+
+        return taskCompletionSource.getTask();
     }
 }
