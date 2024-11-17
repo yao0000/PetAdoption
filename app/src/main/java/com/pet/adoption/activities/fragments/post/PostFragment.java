@@ -2,10 +2,10 @@ package com.pet.adoption.activities.fragments.post;
 
 import static android.app.Activity.RESULT_OK;
 
+import static com.pet.adoption.services.common.Function.*;
+
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -24,20 +23,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.pet.adoption.R;
 import com.pet.adoption.activities.FragmentActivity;
 import com.pet.adoption.activities.fragments.pet.PetFragment;
 import com.pet.adoption.entities.PetInfo;
 import com.pet.adoption.services.common.Listener;
+import com.pet.adoption.services.firebase.FirebaseAuthHelper;
+import com.pet.adoption.services.firebase.FirebaseStorageHelper;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 
 public class PostFragment extends Fragment {
@@ -81,11 +74,9 @@ public class PostFragment extends Fragment {
     }
 
     private void setEventHandler(){
-        // To set event handler
         tv_pic_selection.setOnClickListener(e -> tvPicSelection_Click());
         view.findViewById(R.id.btn_submit).setOnClickListener(e -> btnSubmit_Click());
 
-        // To set value change listener
         sp_type.setOnItemSelectedListener(listener.getSp_type_selected_listener());
         sp_size.setOnItemSelectedListener(listener.getSp_size_selected_listener());
         sp_species.setOnTouchListener(listener.getSp_species_touch_listener());
@@ -114,9 +105,7 @@ public class PostFragment extends Fragment {
         String contact = et_contact.getText().toString().trim();
         String description = et_desc.getText().toString().trim();
 
-        if (name.isEmpty()
-                || contact.isEmpty()
-                || description.isEmpty()
+        if (name.isEmpty() || contact.isEmpty() || description.isEmpty()
                 || sp_age.getSelectedItemPosition() == 0
                 || sp_type.getSelectedItemPosition() == 0
                 || sp_size.getSelectedItemPosition() == 0
@@ -131,48 +120,26 @@ public class PostFragment extends Fragment {
                     .show();
             return;
         }
-        uploadImage();
+        upload();
     }
 
-    private void uploadImage(){
-        File tempFile = null;
-        try {
-            String userUID = FirebaseAuth.getInstance().getUid();
-            filename = userUID + "_" + System.currentTimeMillis() + getFileType(imgUri);
-
-            tempFile = File.createTempFile(filename, getFileType((imgUri)), requireContext().getCacheDir());
-            copyUriToFile(imgUri, tempFile);
-            Uri uri = Uri.fromFile(tempFile);
-            StorageReference ref = FirebaseStorage.getInstance().getReference("images").child(filename);
-
-            UploadTask uploadTask = null;
-            uploadTask = ref.putFile(uri);
-            uploadProgressBar.setVisibility(View.VISIBLE);
-
-            uploadTask.addOnSuccessListener(task -> {
-                uploadInfoToDB();
-            }).addOnFailureListener(task -> {
-
-                uploadProgressBar.setVisibility(View.GONE);
-
-                Toast.makeText(requireContext()
-                                , task.getMessage()
-                                , Toast.LENGTH_SHORT)
-                        .show();
-
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        finally {
-            if (tempFile != null && tempFile.exists()){
-                Boolean deleted = tempFile.delete();
-            }
-        }
-
+    private void upload() {
+        String filename = FirebaseAuthHelper.getUID() + "_" + System.currentTimeMillis()
+                + getFileTypeFromUri(getContext(), imgUri);
+        uploadProgressBar.setVisibility(View.VISIBLE);
+        FirebaseStorageHelper.uploadImage(filename, imgUri)
+                .addOnCompleteListener(task -> {
+                    uploadProgressBar.setVisibility(View.GONE);
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(getContext(), task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    postPetInfo();
+                });
     }
 
-    private void uploadInfoToDB(){
+    private void postPetInfo(){
         String name = et_name.getText().toString().trim();
         String age = sp_age.getSelectedItem().toString();
         String type = sp_type.getSelectedItem().toString();
@@ -191,17 +158,16 @@ public class PostFragment extends Fragment {
 
         info.post()
                 .addOnCompleteListener(task -> {
+
                     if (!task.isSuccessful()){
                         Toast.makeText(getContext()
                                 , Objects.requireNonNull(task.getException()).getMessage()
                                 , Toast.LENGTH_SHORT).show();
 
-                        FirebaseStorage.getInstance()
-                                .getReference("images")
-                                .child(filename)
-                                .delete();
+                        FirebaseStorageHelper.deleteImage(filename);
                         return;
                     }
+
                     new AlertDialog.Builder(requireContext())
                             .setTitle("Info")
                             .setMessage("Submit successfully.\nTo submit a new post?")
@@ -217,57 +183,6 @@ public class PostFragment extends Fragment {
                 });
     }
 
-    private void copyUriToFile(Uri uri, File file) throws IOException, FileNotFoundException {
-        ContentResolver contentResolver = requireContext().getContentResolver();
-        try (InputStream inputStream = contentResolver.openInputStream(uri);
-             FileOutputStream outputStream = new FileOutputStream(file)) {
-            if (inputStream != null) {
-                byte[] buffer = new byte[1024];
-                int length;
-                while ((length = inputStream.read(buffer)) > 0) {
-                    outputStream.write(buffer, 0, length);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    private String getFileName(Uri uri) {
-        String fileName = null;
-        String[] projection = {MediaStore.Images.Media.DISPLAY_NAME};
-
-        Cursor cursor = requireContext().getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            int nameIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
-            cursor.moveToFirst();
-            fileName = cursor.getString(nameIndex);
-            cursor.close();
-        }
-        return fileName;
-    }
-
-    private String getFileType(Uri uri) {
-        String mimeType = null;
-        ContentResolver contentResolver = requireContext().getContentResolver();
-
-        // Get the MIME type
-        if (Objects.equals(uri.getScheme(), "content")) {
-            mimeType = contentResolver.getType(uri);
-        }
-        else {
-            // For file URIs, you can get the file extension and infer the type
-            String filePath = uri.getPath();
-            if (filePath != null) {
-                String fileExtension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(filePath)).toString());
-                mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase());
-            }
-        }
-        assert mimeType != null;
-        return "." + mimeType.substring(mimeType.indexOf("/") + 1);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -275,7 +190,7 @@ public class PostFragment extends Fragment {
         if (requestCode == PICK_IMG && resultCode == RESULT_OK && data != null) {
             imgUri = data.getData();
             if (imgUri == null) return;
-            tv_pic_selection.setText(getFileName(imgUri));
+            tv_pic_selection.setText(getFilenameFromUri(getContext(), imgUri));
         }
     }
 

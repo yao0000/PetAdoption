@@ -230,10 +230,6 @@ public class Listener {
         return values;
     }
 
-    public static String[] getArray(Context con, @ArrayRes int id){
-        return con.getResources().getStringArray(id);
-    }
-
     private void setSpinnerEntries(String[] values){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, values);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -15,7 +15,7 @@ import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
 import com.pet.adoption.entities.PetInfo;
 import com.pet.adoption.services.common.ClipboardHelper;
-import com.pet.adoption.services.common.Function;
+import com.pet.adoption.services.firebase.Function;
 import com.pet.adoption.services.firebase.FirestoreHelper;
 
 public class PetDetailsActivity extends AppCompatActivity {
@@ -56,20 +56,8 @@ public class PetDetailsActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.tv_info)).setText(info.getDescription());
         ((TextView)findViewById(R.id.tv_location)).setText(info.getState());
 
-        Function.setImageView(this,findViewById(R.id.iv_pet_image), info.getFileName());
-
-        FirestoreHelper.loadAccount("users", info.getPublisherUID())
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Toast.makeText(PetDetailsActivity.this,
-                                task.getException().getMessage(),
-                                Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    Account acc = task.getResult();
-                    ((TextView) findViewById(R.id.tv_username)).setText(acc.getUsername());
-                });
-
+        loadPetImage();
+        loadUsername();
         loadSaveStatus();
     }
 
@@ -136,6 +124,24 @@ public class PetDetailsActivity extends AppCompatActivity {
                 "1. Do you commit to long-term care for your pet, and will not abandon it due to unexpected reasons?\n" +
                 "2. Are you willing to allow a post-adoption home visit?\n";
         ClipboardHelper.copyTextToClipboard(getBaseContext(), form);
+    }
+
+    private void loadPetImage(){
+        Function.loadAndSetImage(this,findViewById(R.id.iv_pet_image), info.getFileName());
+    }
+
+    private void loadUsername(){
+        FirestoreHelper.loadAccount(info.getPublisherUID())
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(PetDetailsActivity.this,
+                                task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    Account acc = task.getResult();
+                    ((TextView) findViewById(R.id.tv_username)).setText(acc.getUsername());
+                });
     }
 
     private void loadSaveStatus(){

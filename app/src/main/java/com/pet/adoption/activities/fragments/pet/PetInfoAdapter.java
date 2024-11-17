@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pet.adoption.R;
 import com.pet.adoption.entities.PetInfo;
-import com.pet.adoption.services.common.Function;
+import com.pet.adoption.services.firebase.Function;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class PetInfoAdapter extends RecyclerView.Adapter<PetInfoViewHolder>{
         holder.getTvTag3().setText("#" + info.getGender());
         holder.getTvTag4().setText("#" + info.getSize());
 
-        Function.setImageView(context, holder.getImageView(),info.getFileName());
+        Function.loadAndSetImage(context, holder.getImageView(),info.getFileName());
     }
 
     @Override

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.pet.adoption.activities.MainActivity;
+import com.pet.adoption.MainActivity;
 import com.pet.adoption.R;
 import com.pet.adoption.entities.Account;
 import com.pet.adoption.services.firebase.FirebaseAuthHelper;
@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadUsername(){
-        FirestoreHelper.loadAccount("users", FirebaseAuth.getInstance().getUid())
+        FirestoreHelper.loadAccount(FirebaseAuth.getInstance().getUid())
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()){
                         Toast.makeText(getContext()

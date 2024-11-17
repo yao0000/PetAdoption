@@ -1,9 +1,10 @@
 package com.pet.adoption.entities;
 
+import static com.pet.adoption.services.common.Function.getArray;
+
 import android.content.Context;
 
 import com.pet.adoption.R;
-import com.pet.adoption.services.common.Listener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,12 @@ public class PetList {
 
     public PetList(Context context, List<PetInfo> list){
         this.context = context;
-        this.arrType = Listener.getArray(context, R.array.array_pet_type);
-        this.arrAge = Listener.getArray(context, R.array.array_pet_age);
-        this.arrSize = Listener.getArray(context, R.array.array_pet_size);
-        this.arrState = Listener.getArray(context, R.array.array_states);
-        this.arrGender = Listener.getArray(context, R.array.array_gender);
-        this.arrStatus = Listener.getArray(context, R.array.array_neuter_status);
+        this.arrType = getArray(context, R.array.array_pet_type);
+        this.arrAge = getArray(context, R.array.array_pet_age);
+        this.arrSize = getArray(context, R.array.array_pet_size);
+        this.arrState = getArray(context, R.array.array_states);
+        this.arrGender = getArray(context, R.array.array_gender);
+        this.arrStatus = getArray(context, R.array.array_neuter_status);
         this.list =list;
     }
 
@@ -59,7 +60,7 @@ public class PetList {
                         break;
                 }
             }
-            arrSpecies = Listener.getArray(context, resId);
+            arrSpecies = getArray(context, resId);
         }
 
         // Loop through filteredList in reverse order to safely remove items

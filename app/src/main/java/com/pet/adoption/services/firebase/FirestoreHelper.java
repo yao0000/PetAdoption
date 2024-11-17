@@ -75,12 +75,12 @@ public class FirestoreHelper {
     }
 
 
-    public static Task<Account> loadAccount(String collection, String document) {
+    public static Task<Account> loadAccount(String userUID) {
         TaskCompletionSource<Account> taskCompletionSource = new TaskCompletionSource<>();
 
         FirebaseFirestore.getInstance()
-                .collection(collection)
-                .document(document)
+                .collection("users")
+                .document(userUID)
                 .get()
                 .addOnSuccessListener(snapshot -> {
                     if (!snapshot.exists()) {

@@ -1,9 +1,11 @@
-package com.pet.adoption.activities;
+package com.pet.adoption;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.pet.adoption.activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

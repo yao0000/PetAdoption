@@ -7,6 +7,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class FirebaseAuthHelper {
 
+    public static String getUID(){
+        return FirebaseAuth.getInstance().getUid();
+    }
+
     public static boolean isLoggedIn(){
         return FirebaseAuth.getInstance().getCurrentUser() != null;
     }

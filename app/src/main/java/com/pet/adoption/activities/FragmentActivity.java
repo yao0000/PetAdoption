@@ -18,7 +18,9 @@ import com.pet.adoption.activities.fragments.profile.ProfileFragment;
 import com.pet.adoption.R;
 
 public class FragmentActivity extends AppCompatActivity {
+
     private static FragmentActivity instance;
+
     private final BottomNavigationView.OnNavigationItemSelectedListener listener =
             item -> {
                 Fragment fragment;
