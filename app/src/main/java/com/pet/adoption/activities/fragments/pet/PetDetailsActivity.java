@@ -148,9 +148,6 @@ public class PetDetailsActivity extends AppCompatActivity {
         info.isSaved()
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
-                        Toast.makeText(PetDetailsActivity.this,
-                                task.getException().getMessage(),  // Error message
-                                Toast.LENGTH_LONG).show();
                         return;
                     }
 

@@ -11,7 +11,9 @@ import com.pet.adoption.services.firebase.FirestoreHelper;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PetInfo implements Serializable {
 
@@ -189,7 +191,7 @@ public class PetInfo implements Serializable {
     }
 
     public Task<Void> post(){
-        return FirestoreHelper.upload("pets", petInfoUID, this);
+        return FirestoreHelper.upload("pets", petInfoUID, this.toMap());
     }
 
     public Task<Void> favourite(String mode){
@@ -216,5 +218,24 @@ public class PetInfo implements Serializable {
                 });
 
         return taskCompletionSource.getTask();
+    }
+
+    private Map<String, Object> toMap(){
+        Map<String, Object> map = new HashMap<>();
+        map.put("age", this.age);
+        map.put("contact", this.contact);
+        map.put("description", this.description);
+        map.put("fileName", this.fileName);
+        map.put("gender", this.gender);
+        map.put("name", this.name);
+        map.put("petInfoUID", this.petInfoUID);
+        map.put("publisherUID", this.publisherUID);
+        map.put("size", this.size);
+        map.put("species", this.species);
+        map.put("state", this.state);
+        map.put("status", this.status);
+        map.put("timeStamp", this.timeStamp);
+        map.put("type", this.type);
+        return map;
     }
 }

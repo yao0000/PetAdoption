@@ -115,12 +115,19 @@ public class FirestoreHelper {
                 .collection(collection)
                 .document(document)
                 .set(object)
-                .addOnSuccessListener(aVoid -> {
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()){
+                        taskCompletionSource.setException(task.getException());
+                        return;
+                    }
+                    taskCompletionSource.setResult(task.getResult());
+                })
+                /*.addOnSuccessListener(aVoid -> {
                     taskCompletionSource.setResult(aVoid);
                 })
                 .addOnFailureListener(e -> {
                    taskCompletionSource.setException(e);
-                });
+                })*/;
 
         return taskCompletionSource.getTask();
     }

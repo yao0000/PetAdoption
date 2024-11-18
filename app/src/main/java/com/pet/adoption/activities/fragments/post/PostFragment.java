@@ -30,6 +30,7 @@ import com.pet.adoption.entities.PetInfo;
 import com.pet.adoption.services.common.Listener;
 import com.pet.adoption.services.firebase.FirebaseAuthHelper;
 import com.pet.adoption.services.firebase.FirebaseStorageHelper;
+import com.pet.adoption.services.firebase.FirestoreHelper;
 
 import java.util.Objects;
 
@@ -121,10 +122,11 @@ public class PostFragment extends Fragment {
             return;
         }
         upload();
+        postPetInfo();
     }
 
     private void upload() {
-        String filename = FirebaseAuthHelper.getUID() + "_" + System.currentTimeMillis()
+        filename = FirebaseAuthHelper.getUID() + "_" + System.currentTimeMillis()
                 + getFileTypeFromUri(getContext(), imgUri);
         uploadProgressBar.setVisibility(View.VISIBLE);
         FirebaseStorageHelper.uploadImage(filename, imgUri)
@@ -133,9 +135,7 @@ public class PostFragment extends Fragment {
                     if (!task.isSuccessful()) {
                         Toast.makeText(getContext(), task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
-                        return;
                     }
-                    postPetInfo();
                 });
     }
 
