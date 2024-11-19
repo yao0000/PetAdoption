@@ -174,16 +174,11 @@ public class PetInfo implements Serializable {
 
     public void contactShelter(Context context){
         try{
-            Uri uri = Uri.parse("http://wa.me" + this.contact);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            Uri uri = Uri.parse("https://api.whatsapp.com/send?phone=" + this.contact);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setPackage("com.whatsapp");
-
-            if (intent.resolveActivity(context.getPackageManager()) != null){
-                context.startActivity(intent);
-            }
-            else{
-                Toast.makeText(context, "WhatsApp is not installed on your device", Toast.LENGTH_SHORT).show();
-            }
+            intent.setData(uri);
+            context.startActivity(intent);
         }
         catch(Exception e){
             Toast.makeText(context, "Error opening WhatsApp chat", Toast.LENGTH_SHORT).show();
