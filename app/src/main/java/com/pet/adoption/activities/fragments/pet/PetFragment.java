@@ -79,6 +79,7 @@ public class PetFragment extends Fragment {
         sp_species.setOnItemSelectedListener(spinnerListener);
         sp_status.setOnItemSelectedListener(spinnerListener);
         sp_state.setOnItemSelectedListener(spinnerListener);
+        sp_gender.setOnItemSelectedListener(spinnerListener);
         sp_species.setOnTouchListener(listener.getSp_species_touch_listener());
     }
 
