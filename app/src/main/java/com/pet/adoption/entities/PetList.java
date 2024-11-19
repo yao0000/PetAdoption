@@ -81,7 +81,7 @@ public class PetList {
             if (stateIndex != 0 && !item.getState().equals(arrState[stateIndex])) {
                 shouldRemove = true;
             }
-            if (genderIndex != 0 && !item.getState().equals(arrGender[genderIndex])) { // Assuming gender is stored in state
+            if (genderIndex != 0 && !item.getGender().equals(arrGender[genderIndex])) { // Assuming gender is stored in state
                 shouldRemove = true;
             }
             if (statusIndex != 0 && !item.getStatus().equals(arrStatus[statusIndex])) { // Assuming status check
