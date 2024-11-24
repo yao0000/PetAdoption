@@ -27,8 +27,10 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        if (FirebaseAuthHelper.isLoggedIn())
+        if (FirebaseAuthHelper.isLoggedIn()) {
             startActivity(new Intent(LoginActivity.this, FragmentActivity.class));
+            finish();
+        }
     }
 
     private void onLoad(){

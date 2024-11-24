@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Pet Home</string>
     <string name="home">Home</string>
     <string name="login">Login</string>
     <string name="email">E-mail</string>
