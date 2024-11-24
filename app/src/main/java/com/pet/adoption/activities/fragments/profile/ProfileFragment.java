@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
 
     private void onClickLogOut(){
         FirebaseAuthHelper.signOut();
-        Intent intent = new Intent(getActivity(), MainActivity.class);  // Replace with your main activity
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
